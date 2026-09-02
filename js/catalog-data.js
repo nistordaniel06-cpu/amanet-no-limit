@@ -189,9 +189,9 @@ const PRODUCTS_DATA = [
 
 // Rate de referință curente pentru AUR (RON/gram)
 const GOLD_RATES = {
-  "9k": { buy: 155, pawn: 145, purity: "375‰" },
-  "14k": { buy: 265, pawn: 250, purity: "585‰" },
-  "18k": { buy: 340, pawn: 325, purity: "750‰" },
-  "22k": { buy: 415, pawn: 395, purity: "916‰" },
-  "24k": { buy: 460, pawn: 440, purity: "999‰" }
+  "9k": { buy: 212.6, pawn: 200, purity: "375‰" },
+  "14k": { buy: 331.7, pawn: 315, purity: "585‰" },
+  "18k": { buy: 425.2, pawn: 405, purity: "750‰" },
+  "22k": { buy: 519.3, pawn: 495, purity: "916‰" },
+  "24k": { buy: 567.0, pawn: 540, purity: "999‰" }
 };
