@@ -2,7 +2,12 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Amanet No Limit">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#07090e">
   <title>Amanet No Limit | Aur, Telefoane, Ceasuri & Auto | Bani Pe Loc București</title>
   <meta name="description" content="Casa de Amanet No Limit București Sector 6. Cele mai mari cotații la aur, electronice, ceasuri de lux și auto. Evaluare gratuită în 10 minute, comision minim de la 0.1%/zi.">
   <meta name="keywords" content="amanet bucuresti, amanet aur, amanet telefoane, amanet ceasuri lux, amanet auto, pret aur gram, amanet sector 6, iuliu maniu">
@@ -170,7 +175,7 @@
             <div class="input-group">
               <div class="input-label">
                 <span>Gramaj estimat:</span>
-                <span class="input-val-highlight"><input type="number" id="gold-weight-number" value="10" min="1" max="500" style="width: 70px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 2px;"> grame</span>
+                <span class="input-val-highlight"><input type="number" id="gold-weight-number" inputmode="decimal" pattern="[0-9]*" value="10" min="1" max="500" style="width: 70px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 2px;"> grame</span>
               </div>
               <input type="range" class="calc-range" id="gold-weight-range" min="1" max="100" value="10" step="0.5">
             </div>
@@ -208,7 +213,7 @@
             <div class="input-group">
               <div class="input-label">
                 <span>Suma dorită:</span>
-                <span class="input-val-highlight"><input type="number" id="loan-amount-number" value="2000" min="200" max="100000" step="100" style="width: 90px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 2px;"> RON</span>
+                <span class="input-val-highlight"><input type="number" id="loan-amount-number" inputmode="numeric" pattern="[0-9]*" value="2000" min="200" max="100000" step="100" style="width: 90px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 2px;"> RON</span>
               </div>
               <input type="range" class="calc-range" id="loan-amount-range" min="300" max="25000" value="2000" step="100">
             </div>
@@ -216,7 +221,7 @@
             <div class="input-group">
               <div class="input-label">
                 <span>Perioadă împrumut:</span>
-                <span class="input-val-highlight"><input type="number" id="loan-days-number" value="30" min="5" max="90" style="width: 60px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 2px;"> zile</span>
+                <span class="input-val-highlight"><input type="number" id="loan-days-number" inputmode="numeric" pattern="[0-9]*" value="30" min="5" max="90" style="width: 60px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 2px;"> zile</span>
               </div>
               <input type="range" class="calc-range" id="loan-days-range" min="5" max="90" value="30" step="1">
             </div>
@@ -392,7 +397,7 @@
 
             <div class="input-group">
               <label class="input-label" for="eval-amount">Suma dorită (opțional, RON)</label>
-              <input type="number" class="calc-input" id="eval-amount" placeholder="Ex: 3500">
+              <input type="number" class="calc-input" id="eval-amount" inputmode="numeric" pattern="[0-9]*" placeholder="Ex: 3500">
             </div>
           </div>
 
@@ -416,7 +421,7 @@
 
             <div class="input-group">
               <label class="input-label" for="eval-phone">Număr de telefon (WhatsApp) *</label>
-              <input type="tel" class="calc-input" id="eval-phone" placeholder="07XXXXXXXX" required>
+              <input type="tel" class="calc-input" id="eval-phone" inputmode="tel" placeholder="07XXXXXXXX" required>
             </div>
           </div>
 

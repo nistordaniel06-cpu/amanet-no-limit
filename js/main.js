@@ -1,3 +1,10 @@
+
+// iOS WebKit Haptic Touch & Fluid Spring Feedback
+function triggerHaptic(duration = 10) {
+  if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+    try { navigator.vibrate(duration); } catch(e) {}
+  }
+}
 /**
  * Amanet No Limit - Main Application Logic & Engines
  */
@@ -413,6 +420,7 @@ function initMobileNav() {
 
   calcTabs.forEach(tab => {
     tab.addEventListener('click', () => {
+      triggerHaptic(8);
       const targetPane = tab.dataset.pane;
       calcTabs.forEach(t => t.classList.remove('active'));
       calcPanes.forEach(p => p.classList.remove('active'));

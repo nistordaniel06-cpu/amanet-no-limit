@@ -2,7 +2,12 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Amanet No Limit">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#07090e">
   <title>Calculator Amanet & Cotații Aur Live | Amanet No Limit</title>
   <meta name="description" content="Simulează instant împrumutul de amanet și cotațiile pentru aur. Vezi comisionul zilnic, data scadenței și suma exactă pe care o primești cash pe loc.">
 
@@ -97,7 +102,7 @@
             <div class="input-group">
               <div class="input-label">
                 <span>Gramaj estimat:</span>
-                <span class="input-val-highlight"><input type="number" id="gold-weight-number" value="15" min="1" max="500" style="width: 70px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> g</span>
+                <span class="input-val-highlight"><input type="number" id="gold-weight-number" inputmode="decimal" pattern="[0-9]*" value="15" min="1" max="500" style="width: 70px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> g</span>
               </div>
               <input type="range" class="calc-range" id="gold-weight-range" min="1" max="100" value="15" step="0.5" style="margin-top: 15px;">
             </div>
@@ -140,7 +145,7 @@
             <div class="input-group">
               <div class="input-label">
                 <span>Valoare împrumut (RON):</span>
-                <span class="input-val-highlight"><input type="number" id="loan-amount-number" value="3000" min="200" max="100000" step="100" style="width: 90px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> RON</span>
+                <span class="input-val-highlight"><input type="number" id="loan-amount-number" inputmode="numeric" pattern="[0-9]*" value="3000" min="200" max="100000" step="100" style="width: 90px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> RON</span>
               </div>
               <input type="range" class="calc-range" id="loan-amount-range" min="300" max="30000" value="3000" step="100" style="margin-top: 15px;">
             </div>
@@ -148,7 +153,7 @@
             <div class="input-group">
               <div class="input-label">
                 <span>Durată contract (Zile):</span>
-                <span class="input-val-highlight"><input type="number" id="loan-days-number" value="30" min="5" max="90" style="width: 60px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> zile</span>
+                <span class="input-val-highlight"><input type="number" id="loan-days-number" inputmode="numeric" pattern="[0-9]*" value="30" min="5" max="90" style="width: 60px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> zile</span>
               </div>
               <input type="range" class="calc-range" id="loan-days-range" min="5" max="90" value="30" step="1" style="margin-top: 15px;">
             </div>
