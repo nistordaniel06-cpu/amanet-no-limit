@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magazin Produse Verificate | Amanet No Limit</title>
+  <meta name="description" content="Descoperă oferta de telefoane iPhone, Samsung, bijuterii din aur 14K și 18K, ceasuri de lux și laptopuri verificate cu garanție la Amanet No Limit.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <aside class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-status" id="business-status">
+        <span class="status-indicator"></span>
+        <span>Se verifică programul...</span>
+      </div>
+      <div class="top-bar-contact">
+        <a href="tel:+40761229922">📞 0761 229 922</a>
+        <a href="https://wa.me/40761229922" target="_blank" style="color: var(--emerald);">💬 WhatsApp Magazin</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Amanet No Limit" class="logo-img">
+        <div class="logo-info">
+          <div class="logo-name">AMANET <span>NO LIMIT</span></div>
+          <div class="logo-tag">Magazin & Vânzări</div>
+        </div>
+      </a>
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Acasă</a></li>
+          <li><a href="calculator.html" class="nav-link">Calculator</a></li>
+          <li><a href="produse.html" class="nav-link active">Magazin Produse</a></li>
+          <li><a href="index.html#evaluare" class="nav-link">Evaluare Online</a></li>
+          <li><a href="contact.html" class="nav-link">Contact & Locație</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="index.html#evaluare" class="btn-cta-gold">Solicită Evaluare</a>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Deschide Meniu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CATALOG -->
+  <main style="padding: 60px 0;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Garanție & Verificare Tehnică</span>
+        <h1 class="section-title">Magazinul No Limit — Produse de Lux & Tehnologie</h1>
+        <p class="section-subtitle">
+          Toate produsele sunt 100% originale, verificate amănunțit, fără vicii ascunse și cu garanție legală de conformitate.
+        </p>
+      </div>
+
+      <div class="catalog-controls">
+        <div class="catalog-filters">
+          <button class="filter-btn active" data-category="all">Toate Produsele</button>
+          <button class="filter-btn" data-category="telefoane">Telefoane</button>
+          <button class="filter-btn" data-category="bijuterii">Aur & Bijuterii</button>
+          <button class="filter-btn" data-category="ceasuri">Ceasuri de Lux</button>
+          <button class="filter-btn" data-category="laptopuri">Laptopuri & IT</button>
+          <button class="filter-btn" data-category="auto">Auto</button>
+        </div>
+
+        <div class="catalog-search-wrap">
+          <input type="text" id="catalog-search" class="catalog-search" placeholder="🔍 Caută model, brand sau specificație...">
+        </div>
+      </div>
+
+      <!-- GRID PRODUSE -->
+      <div class="products-grid" id="products-grid">
+        <!-- Rendered by js/main.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Amanet No Limit. Toate drepturile rezervate.</p>
+      <p>Bulevardul Iuliu Maniu 65, Sector 6, București • Tel: +40 761 229 922</p>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/40761229922?text=Salut!%20Vreau%20sa%20aflu%20detalii%20despre%20produsele%20din%20magazin." target="_blank" class="floating-whatsapp" aria-label="WhatsApp Magazin">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.46 3.53 1.34 5.06L2 22l5.17-1.36c1.47.8 3.14 1.27 4.87 1.27 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+  </a>
+
+  <!-- Scripts -->
+  <script src="js/catalog-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
