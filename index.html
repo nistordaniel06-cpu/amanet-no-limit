@@ -256,80 +256,111 @@
   </section>
 
   <!-- ================= LIVE GOLD RATES ================= -->
-  <section class="section-gold-rates" id="cotatii-aur">
+    <!-- ================= LIVE METALS BURSA & -10% TRANSPARENCY SECTION ================= -->
+  <section class="section-bursa-live" id="cotatii-aur">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Transparență Totală</span>
-        <h2 class="section-title">Cotații Live Aur la Amanet No Limit</h2>
+        <div class="bursa-badge-header">
+          <span class="pulse-red-dot"></span>
+          <span>Bursă Spot & BNR • Sincronizat Live</span>
+        </div>
+        <h2 class="section-title">Cotații Burșiere Metale & Formula Noastră Transparentă</h2>
         <p class="section-subtitle">
-          Actualizăm prețurile zilnic în funcție de bursa internațională. Cântărire oficială calibrată metrologic în fața dumneavoastră.
+          La <strong>Amanet No Limit</strong> eliminăm speculațiile: preluăm cotația oficială a bursei și îți garantăm <strong>90% din valoarea ei direct în bani gheață</strong> (marjă fixă de doar -10% pentru lichiditate instantanee).
         </p>
       </div>
 
-      <div class="gold-rates-grid">
-        <div class="gold-rate-card">
-          <div class="gold-karat">Aur 14K</div>
-          <span class="gold-purity">Puritate 585‰ • Cel mai uzual</span>
-          <div class="rate-item">
-            <span class="label">Împrumut Amanet:</span>
-            <span class="val">250 Lei/g</span>
+      <!-- Formula Visual Explainer -->
+      <div class="bursa-formula-card">
+        <div class="formula-step">
+          <span class="label">1. Cotație Oficială Bursă</span>
+          <span class="val bursa" id="hero-bursa-val">100% Cotație Piață</span>
+        </div>
+        <div class="formula-arrow">➔</div>
+        <div class="formula-step">
+          <span class="label">2. Marjă Fixă Transparentă</span>
+          <span class="val discount">-10% Lichiditate</span>
+        </div>
+        <div class="formula-arrow">➔</div>
+        <div class="formula-step">
+          <span class="label">3. Banii Tăi Cash Pe Loc</span>
+          <span class="val final">90% din Valoarea Bursei</span>
+        </div>
+      </div>
+
+      <!-- Content Layout: Live Table + Interactive Seller Simulator -->
+      <div class="bursa-content-layout">
+        <!-- Live Table -->
+        <div class="bursa-table-wrap">
+          <div class="bursa-table-header">
+            <div>
+              <strong style="color: #fff; font-size: 15px;">📊 Tabel Cotații Oficiale & Preț Cumpărare Amanet</strong>
+              <div style="font-size: 12px; color: var(--text-muted);">Cotații per gram • Cântărire calibrată de față cu clientul</div>
+            </div>
+            <div class="catalog-filters" id="bursa-filters" style="margin-bottom: 0;">
+              <button class="filter-btn active" data-bursa-filter="all" style="min-height: 36px; padding: 6px 12px; font-size: 11.5px;">Toate</button>
+              <button class="filter-btn" data-bursa-filter="gold" style="min-height: 36px; padding: 6px 12px; font-size: 11.5px;">Aur (24K-9K)</button>
+              <button class="filter-btn" data-bursa-filter="silver" style="min-height: 36px; padding: 6px 12px; font-size: 11.5px;">Argint (999-800)</button>
+              <button class="filter-btn" data-bursa-filter="platinum" style="min-height: 36px; padding: 6px 12px; font-size: 11.5px;">Platină / Paladiu</button>
+            </div>
           </div>
-          <div class="rate-item">
-            <span class="label">Cumpărare Definitivă:</span>
-            <span class="val" style="color: var(--gold-primary);">265 Lei/g</span>
-          </div>
+
+          <table class="bursa-table">
+            <thead>
+              <tr>
+                <th>Metal & Puritate</th>
+                <th>Cotație Bursă (100%)</th>
+                <th>Marjă Noastră (-10%)</th>
+                <th>Primești Pe Gram (90%)</th>
+                <th>Acțiune</th>
+              </tr>
+            </thead>
+            <tbody id="bursa-tbody">
+              <!-- Rendered via JavaScript -->
+            </tbody>
+          </table>
         </div>
 
-        <div class="gold-rate-card">
-          <div class="gold-karat">Aur 18K</div>
-          <span class="gold-purity">Puritate 750‰ • Bijuterii de lux</span>
-          <div class="rate-item">
-            <span class="label">Împrumut Amanet:</span>
-            <span class="val">325 Lei/g</span>
+        <!-- Interactive Quick Sell Calculator (-10% Formula) -->
+        <div class="bursa-calc-card">
+          <div class="bursa-calc-title">
+            <span>⚡ Calculator Vânzare Metal (-10%)</span>
           </div>
-          <div class="rate-item">
-            <span class="label">Cumpărare Definitivă:</span>
-            <span class="val" style="color: var(--gold-primary);">340 Lei/g</span>
-          </div>
-        </div>
 
-        <div class="gold-rate-card">
-          <div class="gold-karat">Aur 22K</div>
-          <span class="gold-purity">Puritate 916‰ • Monede / Ducați</span>
-          <div class="rate-item">
-            <span class="label">Împrumut Amanet:</span>
-            <span class="val">395 Lei/g</span>
+          <div class="input-group">
+            <label class="input-label">Alege Metalul & Puritatea:</label>
+            <select id="sim-metal-select" class="calc-select">
+              <!-- Incarcat dinamic -->
+            </select>
           </div>
-          <div class="rate-item">
-            <span class="label">Cumpărare Definitivă:</span>
-            <span class="val" style="color: var(--gold-primary);">415 Lei/g</span>
-          </div>
-        </div>
 
-        <div class="gold-rate-card">
-          <div class="gold-karat">Aur 24K</div>
-          <span class="gold-purity">Puritate 999‰ • Lingouri / Pur</span>
-          <div class="rate-item">
-            <span class="label">Împrumut Amanet:</span>
-            <span class="val">440 Lei/g</span>
+          <div class="input-group">
+            <div class="input-label">
+              <span>Gramaj Net:</span>
+              <span class="input-val-highlight"><span id="sim-grams-val">10</span> grame</span>
+            </div>
+            <input type="range" id="sim-grams-range" class="calc-range" min="1" max="250" value="10">
+            <input type="number" id="sim-grams-num" class="calc-input" min="0.1" max="2000" step="0.1" value="10" inputmode="decimal" pattern="[0-9]*" style="margin-top: 6px;">
           </div>
-          <div class="rate-item">
-            <span class="label">Cumpărare Definitivă:</span>
-            <span class="val" style="color: var(--gold-primary);">460 Lei/g</span>
-          </div>
-        </div>
 
-        <div class="gold-rate-card">
-          <div class="gold-karat">Aur 9K</div>
-          <span class="gold-purity">Puritate 375‰ • Obiecte vechi</span>
-          <div class="rate-item">
-            <span class="label">Împrumut Amanet:</span>
-            <span class="val">145 Lei/g</span>
+          <div class="calc-result-box" style="margin-top: 14px;">
+            <div class="result-row">
+              <span>Cotație Totală Bursă (100%):</span>
+              <strong id="sim-res-bursa" style="color: #38bdf8;">-</strong>
+            </div>
+            <div class="result-row">
+              <span>Marjă Fixă (-10%):</span>
+              <strong id="sim-res-diff" style="color: #f87171;">-</strong>
+            </div>
+            <div class="result-row main">
+              <span>BANII TĂI CASH PE LOC:</span>
+              <span class="result-amount" id="sim-res-our">-</span>
+            </div>
           </div>
-          <div class="rate-item">
-            <span class="label">Cumpărare Definitivă:</span>
-            <span class="val" style="color: var(--gold-primary);">155 Lei/g</span>
-          </div>
+
+          <a href="#" id="sim-whatsapp-cta" target="_blank" class="calc-action-btn" style="margin-top: 14px; text-decoration: none;">
+            💬 Vinde Acum la Acest Preț
+          </a>
         </div>
       </div>
     </div>
@@ -733,6 +764,7 @@
 
   <!-- Scripts -->
   <script src="js/catalog-data.js"></script>
+  <script src="js/metals-bursa.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

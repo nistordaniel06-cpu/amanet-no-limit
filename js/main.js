@@ -12,6 +12,7 @@ function triggerHaptic(duration = 10) {
 document.addEventListener('DOMContentLoaded', () => {
   initScheduleStatus();
   initGoldCalculator();
+  initBursaSection();
   initLoanCalculator();
   initEvaluationWizard();
   initCatalog();
@@ -430,4 +431,167 @@ function initMobileNav() {
       if (activePane) activePane.classList.add('active');
     });
   });
+}
+
+
+/* ==========================================================================
+   LIVE METALS BURSA & -10% DISCOUNT INTERACTIVE LOGIC
+   ========================================================================== */
+function initBursaSection() {
+  if (!window.MetalsEngine) return;
+
+  const engine = window.MetalsEngine;
+  const tbody = document.getElementById("bursa-tbody");
+  const simSelect = document.getElementById("sim-metal-select");
+  const simRange = document.getElementById("sim-grams-range");
+  const simNum = document.getElementById("sim-grams-num");
+  const simGramsDisplay = document.getElementById("sim-grams-val");
+  const filterBtns = document.querySelectorAll("[data-bursa-filter]");
+
+  let currentFilter = "all";
+
+  // Sincronizare live cotații (dacă este conexiune la internet)
+  engine.syncLiveRates().then(() => {
+    renderTable();
+    updateSimulator();
+    updateTopBarTicker();
+  });
+
+  function renderTable() {
+    if (!tbody) return;
+    const metals = engine.getAllMetals();
+    
+    const filtered = metals.filter(m => {
+      if (currentFilter === "gold") return m.symbol === "Au";
+      if (currentFilter === "silver") return m.symbol === "Ag";
+      if (currentFilter === "platinum") return m.symbol === "Pt" || m.symbol === "Pd";
+      return true;
+    });
+
+    tbody.innerHTML = filtered.map(m => {
+      let badgeClass = "gold";
+      if (m.symbol === "Ag") badgeClass = "silver";
+      if (m.symbol === "Pt" || m.symbol === "Pd") badgeClass = "platinum";
+
+      const waMsg = encodeURIComponent(`Bună ziua! Vă contactez de pe site-ul amanetnolimit.com. Aș dori să vând ${m.name} la prețul afișat de ${m.ourPrice} Lei/gram (-10% din cotația de bursă). Când pot veni la agenție?`);
+
+      return `
+        <tr>
+          <td>
+            <div class="bursa-metal-name">
+              <span class="metal-badge ${badgeClass}">${m.karat}</span>
+              <span>${m.name}</span>
+            </div>
+          </td>
+          <td>
+            <span class="price-bursa-tag">${m.bursaPrice.toFixed(2)} Lei/g</span>
+          </td>
+          <td>
+            <span class="price-discount-tag">-${m.diff.toFixed(2)} Lei (-${m.discountPercent}%)</span>
+          </td>
+          <td>
+            <span class="price-our-tag">${m.ourPrice.toFixed(2)} Lei/g</span>
+          </td>
+          <td>
+            <a href="https://wa.me/40761229922?text=${waMsg}" target="_blank" 
+               class="btn-inquire" style="padding: 6px 12px; font-size: 11.5px; min-height: 36px;">
+              💬 Vinde
+            </a>
+          </td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  // Populare selector simulator
+  if (simSelect) {
+    const metals = engine.getAllMetals();
+    simSelect.innerHTML = metals.map(m => `
+      <option value="${m.id}" data-our="${m.ourPrice}" data-bursa="${m.bursaPrice}">
+        ${m.name} — ${m.ourPrice} Lei/g (-10% din Bursă)
+      </option>
+    `).join("");
+
+    simSelect.addEventListener("change", () => {
+      triggerHaptic(8);
+      updateSimulator();
+    });
+  }
+
+  // Sincronizare Range & Number inputs
+  if (simRange && simNum) {
+    simRange.addEventListener("input", (e) => {
+      simNum.value = e.target.value;
+      if (simGramsDisplay) simGramsDisplay.textContent = e.target.value;
+      updateSimulator();
+    });
+
+    simNum.addEventListener("input", (e) => {
+      simRange.value = e.target.value;
+      if (simGramsDisplay) simGramsDisplay.textContent = e.target.value;
+      updateSimulator();
+    });
+  }
+
+  function updateSimulator() {
+    if (!simSelect) return;
+    const selectedOpt = simSelect.options[simSelect.selectedIndex];
+    if (!selectedOpt) return;
+
+    const ourPerGram = parseFloat(selectedOpt.dataset.our) || 0;
+    const bursaPerGram = parseFloat(selectedOpt.dataset.bursa) || 0;
+    const grams = parseFloat(simNum ? simNum.value : 10) || 0;
+
+    const totalBursa = Math.round(bursaPerGram * grams * 100) / 100;
+    const totalOur = Math.round(ourPerGram * grams * 10) / 10;
+    const totalDiff = Math.round((totalBursa - totalOur) * 100) / 100;
+
+    const bursaEl = document.getElementById("sim-res-bursa");
+    const diffEl = document.getElementById("sim-res-diff");
+    const ourEl = document.getElementById("sim-res-our");
+    const waCta = document.getElementById("sim-whatsapp-cta");
+
+    if (bursaEl) bursaEl.textContent = `${totalBursa.toLocaleString("ro-RO")} Lei`;
+    if (diffEl) diffEl.textContent = `-${totalDiff.toLocaleString("ro-RO")} Lei (-10%)`;
+    if (ourEl) ourEl.textContent = `${totalOur.toLocaleString("ro-RO")} Lei Cash`;
+
+    if (waCta) {
+      const metalText = selectedOpt.text.split("—")[0].trim();
+      const msg = encodeURIComponent(`Bună ziua! Conform calculatorului de bursă de pe amanetnolimit.com, am ${grams} grame de ${metalText}. Doresc să le vând la prețul calculat de ${totalOur.toLocaleString("ro-RO")} Lei Cash (reducere -10% din bursă). Putem stabili o evaluare la agenție?`);
+      waCta.href = `https://wa.me/40761229922?text=${msg}`;
+    }
+  }
+
+  // Filtrare tabel
+  filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      triggerHaptic(8);
+      filterBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.dataset.bursaFilter;
+      renderTable();
+    });
+  });
+
+  function updateTopBarTicker() {
+    const ratesWrap = document.querySelector(".top-bar-rates");
+    if (!ratesWrap) return;
+    const m = engine.rates;
+    const p14 = engine.calculateOffer(m.gold_14k.bursaPrice);
+    const p18 = engine.calculateOffer(m.gold_18k.bursaPrice);
+    const p24 = engine.calculateOffer(m.gold_24k.bursaPrice);
+    const pag = engine.calculateOffer(m.silver_925.bursaPrice);
+
+    ratesWrap.innerHTML = `
+      <span>Aur 14K (-10%): <strong class="rate-badge">${p14} Lei/g</strong></span>
+      <span>18K: <strong class="rate-badge">${p18} Lei/g</strong></span>
+      <span>24K: <strong class="rate-badge">${p24} Lei/g</strong></span>
+      <span>Argint 925: <strong class="rate-badge" style="color: #cbd5e1;">${pag} Lei/g</strong></span>
+    `;
+  }
+
+  // Render initial
+  renderTable();
+  updateSimulator();
+  updateTopBarTicker();
 }

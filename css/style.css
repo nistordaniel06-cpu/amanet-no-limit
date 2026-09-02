@@ -1555,3 +1555,187 @@ dialog.custom-modal::backdrop {
   .mobile-bottom-bar { display: block; }
   .footer-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   BURSA METALS LIVE & -10% DISCOUNT ENGINE SECTION
+   ========================================================================== */
+.section-bursa-live {
+  padding: 65px 0;
+  background: radial-gradient(circle at 80% 10%, rgba(245, 197, 24, 0.07) 0%, transparent 60%),
+              radial-gradient(circle at 20% 90%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+              #080b12;
+  border-top: 0.5px solid var(--border-light);
+  border-bottom: 0.5px solid var(--border-light);
+}
+
+.bursa-badge-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.pulse-red-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 10px #ef4444;
+  animation: pulse-red 1.6s infinite;
+}
+@keyframes pulse-red { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
+
+.bursa-formula-card {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin: 0 auto 36px;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.formula-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.formula-step .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+.formula-step .val { font-family: var(--font-display); font-size: 20px; font-weight: 900; }
+.formula-step .val.bursa { color: #38bdf8; }
+.formula-step .val.discount { color: #f87171; }
+.formula-step .val.final { color: var(--gold-primary); font-size: 23px; }
+.formula-arrow { font-size: 22px; color: var(--gold-primary); font-weight: 800; }
+
+.bursa-content-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Tabel Cotații Bursă */
+.bursa-table-wrap {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.bursa-table-header {
+  padding: 16px 20px;
+  background: var(--bg-surface);
+  border-bottom: 0.5px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bursa-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.bursa-table th {
+  background: rgba(14, 18, 26, 0.9);
+  padding: 12px 16px;
+  color: var(--text-muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 0.5px solid var(--border-light);
+}
+
+.bursa-table td {
+  padding: 14px 16px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.bursa-table tr:hover td {
+  background: rgba(245, 197, 24, 0.03);
+}
+
+.bursa-metal-name {
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.metal-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+}
+.metal-badge.gold { background: rgba(245, 197, 24, 0.15); color: var(--gold-primary); border: 1px solid var(--border-gold); }
+.metal-badge.silver { background: rgba(226, 232, 240, 0.15); color: #cbd5e1; border: 1px solid rgba(226, 232, 240, 0.3); }
+.metal-badge.platinum { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+
+.price-bursa-tag {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.price-discount-tag {
+  color: #f87171;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.price-our-tag {
+  color: var(--gold-primary);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 16px;
+}
+
+/* Calculator Interactiv Bursa -10% */
+.bursa-calc-card {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 80px;
+}
+
+.bursa-calc-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .bursa-content-layout { grid-template-columns: 1fr; }
+  .bursa-formula-card { flex-direction: column; gap: 12px; }
+  .formula-arrow { transform: rotate(90deg); }
+  .bursa-table th:nth-child(3), .bursa-table td:nth-child(3) { display: none; } /* Ascunde coloana de marja pe ecrane mici */
+}
