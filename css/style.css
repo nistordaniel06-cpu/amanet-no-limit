@@ -1739,3 +1739,23 @@ dialog.custom-modal::backdrop {
   .formula-arrow { transform: rotate(90deg); }
   .bursa-table th:nth-child(3), .bursa-table td:nth-child(3) { display: none; } /* Ascunde coloana de marja pe ecrane mici */
 }
+
+/* Live Rate Update Flash Effect */
+@keyframes rateFlash {
+  0% { background-color: rgba(16, 185, 129, 0.35); color: #fff; transform: scale(1.03); }
+  100% { background-color: transparent; transform: scale(1); }
+}
+
+.rate-flash-green {
+  animation: rateFlash 1s ease-out;
+  border-radius: 4px;
+}
+
+.bursa-live-timer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--text-dim);
+  font-weight: 600;
+}

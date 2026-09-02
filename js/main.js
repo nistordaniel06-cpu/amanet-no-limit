@@ -449,15 +449,20 @@ function initBursaSection() {
   const filterBtns = document.querySelectorAll("[data-bursa-filter]");
 
   let currentFilter = "all";
+  let secondsSinceUpdate = 0;
 
-  // Sincronizare live cotații (dacă este conexiune la internet)
-  engine.syncLiveRates().then(() => {
-    renderTable();
-    updateSimulator();
-    updateTopBarTicker();
-  });
+  // Timer secundar pentru afișarea stării în timp real
+  setInterval(() => {
+    secondsSinceUpdate++;
+    const timerBadge = document.getElementById("bursa-timer-badge");
+    if (timerBadge) {
+      const nextIn = Math.max(0, 30 - (secondsSinceUpdate % 30));
+      timerBadge.textContent = `Actualizat acum ${secondsSinceUpdate % 30}s • Următoarea verificare în ${nextIn}s`;
+    }
+  }, 1000);
 
-  function renderTable() {
+  // Funcție de randare tabel cu animație flash la actualizare
+  function renderTable(flash = false) {
     if (!tbody) return;
     const metals = engine.getAllMetals();
     
@@ -473,7 +478,8 @@ function initBursaSection() {
       if (m.symbol === "Ag") badgeClass = "silver";
       if (m.symbol === "Pt" || m.symbol === "Pd") badgeClass = "platinum";
 
-      const waMsg = encodeURIComponent(`Bună ziua! Vă contactez de pe site-ul amanetnolimit.com. Aș dori să vând ${m.name} la prețul afișat de ${m.ourPrice} Lei/gram (-10% din cotația de bursă). Când pot veni la agenție?`);
+      const flashClass = flash ? "rate-flash-green" : "";
+      const waMsg = encodeURIComponent(`Bună ziua! Vă contactez de pe site-ul amanetnolimit.com. Aș dori să vând ${m.name} la cotația actualizată de bursă: ${m.ourPrice} Lei/gram (-10% din bursă). Când pot veni la agenție?`);
 
       return `
         <tr>
@@ -484,13 +490,13 @@ function initBursaSection() {
             </div>
           </td>
           <td>
-            <span class="price-bursa-tag">${m.bursaPrice.toFixed(2)} Lei/g</span>
+            <span class="price-bursa-tag ${flashClass}">${m.bursaPrice.toFixed(2)} Lei/g</span>
           </td>
           <td>
             <span class="price-discount-tag">-${m.diff.toFixed(2)} Lei (-${m.discountPercent}%)</span>
           </td>
           <td>
-            <span class="price-our-tag">${m.ourPrice.toFixed(2)} Lei/g</span>
+            <span class="price-our-tag ${flashClass}">${m.ourPrice.toFixed(2)} Lei/g</span>
           </td>
           <td>
             <a href="https://wa.me/40761229922?text=${waMsg}" target="_blank" 
@@ -504,7 +510,9 @@ function initBursaSection() {
   }
 
   // Populare selector simulator
-  if (simSelect) {
+  function populateSelect() {
+    if (!simSelect) return;
+    const currentVal = simSelect.value;
     const metals = engine.getAllMetals();
     simSelect.innerHTML = metals.map(m => `
       <option value="${m.id}" data-our="${m.ourPrice}" data-bursa="${m.bursaPrice}">
@@ -512,6 +520,13 @@ function initBursaSection() {
       </option>
     `).join("");
 
+    if (currentVal && simSelect.querySelector(`option[value="${currentVal}"]`)) {
+      simSelect.value = currentVal;
+    }
+  }
+
+  if (simSelect) {
+    populateSelect();
     simSelect.addEventListener("change", () => {
       triggerHaptic(8);
       updateSimulator();
@@ -557,7 +572,7 @@ function initBursaSection() {
 
     if (waCta) {
       const metalText = selectedOpt.text.split("—")[0].trim();
-      const msg = encodeURIComponent(`Bună ziua! Conform calculatorului de bursă de pe amanetnolimit.com, am ${grams} grame de ${metalText}. Doresc să le vând la prețul calculat de ${totalOur.toLocaleString("ro-RO")} Lei Cash (reducere -10% din bursă). Putem stabili o evaluare la agenție?`);
+      const msg = encodeURIComponent(`Bună ziua! Conform cotației live de bursă de pe amanetnolimit.com, am ${grams} grame de ${metalText}. Doresc să le vând la prețul calculat de ${totalOur.toLocaleString("ro-RO")} Lei Cash (-10% din bursă). Când pot veni la agenție?`);
       waCta.href = `https://wa.me/40761229922?text=${msg}`;
     }
   }
@@ -573,7 +588,7 @@ function initBursaSection() {
     });
   });
 
-  function updateTopBarTicker() {
+  function updateTopBarTicker(flash = false) {
     const ratesWrap = document.querySelector(".top-bar-rates");
     if (!ratesWrap) return;
     const m = engine.rates;
@@ -581,17 +596,27 @@ function initBursaSection() {
     const p18 = engine.calculateOffer(m.gold_18k.bursaPrice);
     const p24 = engine.calculateOffer(m.gold_24k.bursaPrice);
     const pag = engine.calculateOffer(m.silver_925.bursaPrice);
+    const flashClass = flash ? "rate-flash-green" : "";
 
     ratesWrap.innerHTML = `
-      <span>Aur 14K (-10%): <strong class="rate-badge">${p14} Lei/g</strong></span>
-      <span>18K: <strong class="rate-badge">${p18} Lei/g</strong></span>
-      <span>24K: <strong class="rate-badge">${p24} Lei/g</strong></span>
-      <span>Argint 925: <strong class="rate-badge" style="color: #cbd5e1;">${pag} Lei/g</strong></span>
+      <span>Aur 14K (-10%): <strong class="rate-badge ${flashClass}">${p14} Lei/g</strong></span>
+      <span>18K: <strong class="rate-badge ${flashClass}">${p18} Lei/g</strong></span>
+      <span>24K: <strong class="rate-badge ${flashClass}">${p24} Lei/g</strong></span>
+      <span>Argint 925: <strong class="rate-badge ${flashClass}" style="color: #cbd5e1;">${pag} Lei/g</strong></span>
     `;
   }
 
+  // ABONARE LA MOTORUL DE SINCRONIZARE CONTINUĂ
+  engine.subscribe((metals, hasChanged, lastTime) => {
+    secondsSinceUpdate = 0;
+    populateSelect();
+    renderTable(hasChanged);
+    updateSimulator();
+    updateTopBarTicker(hasChanged);
+  });
+
   // Render initial
-  renderTable();
+  renderTable(false);
   updateSimulator();
-  updateTopBarTicker();
+  updateTopBarTicker(false);
 }
