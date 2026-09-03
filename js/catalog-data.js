@@ -187,11 +187,14 @@ const PRODUCTS_DATA = [
   }
 ];
 
-// Rate de referință curente pentru AUR (RON/gram)
+// Rate de referință curente pentru AUR (RON/gram) - Cotație Spot SmartGold 647.67 RON/g & Marjă -10%
 const GOLD_RATES = {
-  "9k": { buy: 212.6, pawn: 200, purity: "375‰" },
-  "14k": { buy: 331.7, pawn: 315, purity: "585‰" },
-  "18k": { buy: 425.2, pawn: 405, purity: "750‰" },
-  "22k": { buy: 519.3, pawn: 495, purity: "916‰" },
-  "24k": { buy: 567.0, pawn: 540, purity: "999‰" }
+  "8k":  { buy: 194.1, pawn: 184, purity: "333‰" },
+  "9k":  { buy: 218.6, pawn: 207, purity: "375‰" },
+  "12k": { buy: 291.5, pawn: 276, purity: "500‰" },
+  "14k": { buy: 341.0, pawn: 324, purity: "585‰" },
+  "18k": { buy: 437.2, pawn: 415, purity: "750‰" },
+  "21k": { buy: 510.0, pawn: 484, purity: "875‰" },
+  "22k": { buy: 533.9, pawn: 507, purity: "916‰" },
+  "24k": { buy: 582.9, pawn: 553, purity: "999‰" }
 };
