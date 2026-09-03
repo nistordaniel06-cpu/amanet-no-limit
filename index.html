@@ -24,7 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260903-3">
 </head>
 <body>
 
@@ -265,6 +265,11 @@
       <div class="showcase-banner-card">
         <div class="showcase-media">
           <div class="showcase-slider-wrap" id="showcase-slider">
+            <!-- Progress Line Indicator -->
+            <div class="slider-progress-track">
+              <div class="slider-progress-bar" id="slider-progress"></div>
+            </div>
+
             <div class="showcase-slides-track">
               <div class="showcase-slide active">
                 <img src="assets/herophone1.png" alt="Amanet No Limit - Electronice, Auto, Aur" class="showcase-img" loading="eager">
@@ -341,6 +346,48 @@
       </div>
     </div>
   </section>
+
+  <!-- Slider Immediate Initialization Script -->
+  <script>
+    (function() {
+      const slider = document.getElementById('showcase-slider');
+      if (!slider) return;
+      const slides = slider.querySelectorAll('.showcase-slide');
+      const dots = slider.querySelectorAll('.slider-dot');
+      const progressBar = document.getElementById('slider-progress');
+      if (!slides.length) return;
+      let cur = 0;
+      const speed = 2800;
+
+      function updateSlide(i) {
+        cur = (i + slides.length) % slides.length;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === cur));
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === cur));
+        if (progressBar) {
+          progressBar.style.transition = 'none';
+          progressBar.style.width = '0%';
+          void progressBar.offsetWidth;
+          progressBar.style.transition = 'width ' + speed + 'ms linear';
+          progressBar.style.width = '100%';
+        }
+      }
+
+      updateSlide(0);
+      let timer = setInterval(() => updateSlide(cur + 1), speed);
+
+      const prev = document.getElementById('slider-prev');
+      const next = document.getElementById('slider-next');
+      if (next) next.addEventListener('click', () => { clearInterval(timer); updateSlide(cur + 1); timer = setInterval(() => updateSlide(cur + 1), speed); });
+      if (prev) prev.addEventListener('click', () => { clearInterval(timer); updateSlide(cur - 1); timer = setInterval(() => updateSlide(cur + 1), speed); });
+      dots.forEach(d => {
+        d.addEventListener('click', () => {
+          clearInterval(timer);
+          updateSlide(parseInt(d.dataset.slide, 10));
+          timer = setInterval(() => updateSlide(cur + 1), speed);
+        });
+      });
+    })();
+  </script>
 
   <!-- ================= LIVE METALS BURSA & -10% TRANSPARENCY SECTION ================= -->
   <section class="section-bursa-live" id="cotatii-aur">
@@ -998,8 +1045,8 @@
   </dialog>
 
   <!-- Scripts -->
-  <script src="js/catalog-data.js"></script>
-  <script src="js/metals-bursa.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/catalog-data.js?v=20260903-3"></script>
+  <script src="js/metals-bursa.js?v=20260903-3"></script>
+  <script src="js/main.js?v=20260903-3"></script>
 </body>
 </html>
