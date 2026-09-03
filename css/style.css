@@ -1759,3 +1759,180 @@ dialog.custom-modal::backdrop {
   color: var(--text-dim);
   font-weight: 600;
 }
+
+/* ==========================================================================
+   HOMEPAGE SHOWCASE BANNER (HERO PHONE MOCKUP)
+   ========================================================================== */
+.section-showcase {
+  padding: 10px 0 50px 0;
+  position: relative;
+}
+
+.showcase-banner-card {
+  background: linear-gradient(135deg, rgba(20, 25, 36, 0.95) 0%, rgba(14, 18, 26, 0.98) 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-xl);
+  padding: 36px 40px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 35px rgba(245, 197, 24, 0.12);
+}
+
+.showcase-banner-card::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(245, 197, 24, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.showcase-media {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.showcase-img-frame {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid rgba(245, 197, 24, 0.35);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.55), 0 0 25px rgba(245, 197, 24, 0.15);
+  background: #ffffff;
+  transition: transform var(--spring-smooth), box-shadow var(--spring-smooth);
+}
+
+.showcase-img-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(245, 197, 24, 0.25);
+  border-color: var(--gold-primary);
+}
+
+.showcase-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.showcase-badge-overlay {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(14, 18, 26, 0.88);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.showcase-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase-title {
+  font-family: var(--font-display);
+  font-size: clamp(23px, 3vw, 32px);
+  font-weight: 900;
+  line-height: 1.22;
+  margin: 10px 0 14px 0;
+  letter-spacing: -0.5px;
+}
+
+.showcase-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.showcase-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 24px;
+}
+
+.showcase-pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background var(--spring-fast), border-color var(--spring-fast);
+}
+
+.showcase-pillar-item:hover {
+  background: rgba(245, 197, 24, 0.06);
+  border-color: rgba(245, 197, 24, 0.25);
+}
+
+.pillar-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(245, 197, 24, 0.12);
+  border: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.pillar-text strong {
+  display: block;
+  font-size: 13.5px;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.pillar-text span {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  display: block;
+}
+
+.showcase-cta-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .section-showcase {
+    padding: 10px 0 40px 0;
+  }
+  .showcase-banner-card {
+    grid-template-columns: 1fr;
+    padding: 24px 18px;
+    gap: 24px;
+  }
+  .showcase-img-frame {
+    max-width: 100%;
+  }
+}
+
