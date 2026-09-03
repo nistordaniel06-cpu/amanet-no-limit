@@ -1427,8 +1427,8 @@ select.calc-select {
 
 .mobile-bottom-bar-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
 }
 
 .mobile-bar-btn {
@@ -1436,14 +1436,23 @@ select.calc-select {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  font-size: 11px;
+  gap: 3px;
+  font-size: 10.5px;
   font-weight: 700;
   color: var(--text-muted);
   text-decoration: none;
   min-height: 48px;
   padding: 4px 0;
   border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--spring-fast), transform var(--spring-fast);
+}
+
+.mobile-bar-btn:active {
+  transform: scale(0.92);
 }
 
 .mobile-bar-btn.active, .mobile-bar-btn:hover {
@@ -1458,25 +1467,373 @@ select.calc-select {
   position: fixed;
   bottom: calc(76px + var(--sab));
   right: max(20px, var(--sar));
-  background: var(--emerald-gradient);
-  color: #fff;
-  width: 58px;
-  height: 58px;
-  min-height: 44px;
-  min-width: 44px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
+  background: var(--emerald-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
-  z-index: 980;
-  transition: transform var(--spring-fast), box-shadow var(--spring-fast);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);
+  z-index: 990;
+  transition: transform var(--spring-smooth), box-shadow var(--spring-smooth);
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6);
 }
 
 .floating-whatsapp svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}
+
+/* ==========================================================================
+   IOS INTERACTIVE ACTION SHEET & MENU SYSTEM
+   ========================================================================== */
+.ios-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.72);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+}
+
+.ios-menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.ios-menu-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 102%);
+  width: 100%;
+  max-width: 560px;
+  max-height: 88vh;
+  max-height: 88dvh;
+  background: rgba(14, 18, 27, 0.96);
+  -webkit-backdrop-filter: blur(35px) saturate(200%);
+  backdrop-filter: blur(35px) saturate(200%);
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  border: 1px solid var(--border-gold);
+  border-bottom: none;
+  box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(245, 197, 24, 0.15);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10000;
+  padding-bottom: max(14px, calc(8px + var(--sab)));
+}
+
+.ios-menu-overlay.open .ios-menu-sheet {
+  transform: translate(-50%, 0);
+}
+
+/* Grabber Bar */
+.ios-sheet-grabber {
+  width: 100%;
+  padding: 12px 0 6px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  touch-action: none;
+}
+
+.grabber-pill {
+  width: 40px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.32);
+  transition: background 0.2s ease, width 0.2s ease;
+}
+
+.ios-sheet-grabber:active .grabber-pill {
+  background: var(--gold-primary);
+  width: 48px;
+}
+
+/* Header */
+.ios-sheet-header {
+  padding: 4px 22px 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.ios-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ios-header-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px;
+}
+
+.ios-brand-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.ios-brand-status {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ios-close-btn {
   width: 32px;
   height: 32px;
-  fill: #fff;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--spring-fast);
+}
+
+.ios-close-btn:active {
+  transform: scale(0.9);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Ticker Pill in Menu */
+.ios-quick-ticker {
+  margin: 12px 20px 4px 20px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(245, 197, 24, 0.12) 0%, rgba(245, 197, 24, 0.03) 100%);
+  border: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ios-ticker-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ticker-gold-coin {
+  font-size: 20px;
+}
+
+.ticker-sub {
+  font-size: 10.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+.ticker-val {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--gold-primary);
+}
+
+.ios-ticker-cta {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #38bdf8;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.12);
+  transition: background 0.2s;
+}
+
+/* Scrollable Content */
+.ios-sheet-content {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 20px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ios-group-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-left: 8px;
+  margin-bottom: -9px;
+}
+
+.ios-group-card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.ios-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ios-menu-item:last-child {
+  border-bottom: none;
+}
+
+.ios-menu-item:active {
+  background: rgba(245, 197, 24, 0.1);
+}
+
+.ios-item-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* Icon Gradients */
+.bg-gradient-gold   { background: linear-gradient(135deg, #ffd84d, #f5c518); color: #000; }
+.bg-gradient-amber  { background: linear-gradient(135deg, #fbbf24, #d97706); color: #000; }
+.bg-gradient-emerald{ background: linear-gradient(135deg, #34d399, #059669); color: #fff; }
+.bg-gradient-purple { background: linear-gradient(135deg, #c084fc, #7c3aed); color: #fff; }
+.bg-gradient-cyan   { background: linear-gradient(135deg, #38bdf8, #0284c7); color: #fff; }
+.bg-gradient-red    { background: linear-gradient(135deg, #f87171, #dc2626); color: #fff; }
+.bg-gradient-yellow { background: linear-gradient(135deg, #fde047, #ca8a04); color: #000; }
+.bg-gradient-blue   { background: linear-gradient(135deg, #60a5fa, #2563eb); color: #fff; }
+.bg-gradient-pink   { background: linear-gradient(135deg, #f472b6, #db2777); color: #fff; }
+
+.ios-item-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ios-item-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.ios-item-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ios-item-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+
+.ios-item-badge.green {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--emerald);
+  border: 0.5px solid rgba(16, 185, 129, 0.3);
+}
+
+.ios-chevron {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+/* Footer Action Buttons */
+.ios-sheet-footer {
+  padding: 12px 20px 2px 20px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 12px;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.ios-btn-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: var(--emerald-gradient);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+  transition: transform var(--spring-fast);
+}
+
+.ios-btn-whatsapp:active {
+  transform: scale(0.97);
+}
+
+.ios-btn-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform var(--spring-fast);
+}
+
+.ios-btn-call:active {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /* ==========================================================================

@@ -210,7 +210,168 @@
       <p>&copy; 2026 Amanet No Limit. Toate drepturile rezervate.</p>
       <a href="tel:+40761229922" style="color: var(--gold-primary);">📞 0761 229 922</a>
     </div>
-  </footer>
+  <!-- ================= STICKY MOBILE NAVIGATION BAR (IOS TABBAR) ================= -->
+  <div class="mobile-bottom-bar">
+    <div class="mobile-bottom-bar-grid">
+      <a href="index.html" class="mobile-bar-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>Acasă</span>
+      </a>
+      <a href="index.html#cotatii-aur" class="mobile-bar-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-2h2v2zm0-4h-2V7h2v5.5z"/></svg>
+        <span>Cotații</span>
+      </a>
+      <a href="calculator.html" class="mobile-bar-btn active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-6 14H7v-2h6v2zm4-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <span>Calculator</span>
+      </a>
+      <a href="index.html#evaluare" class="mobile-bar-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <span>Evaluare</span>
+      </a>
+      <button type="button" class="mobile-bar-btn" id="open-ios-menu-btn" aria-label="Deschide Meniu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+        <span>Meniu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= IOS INTERACTIVE ACTION SHEET MENU ================= -->
+  <div class="ios-menu-overlay" id="ios-menu-overlay" aria-hidden="true">
+    <div class="ios-menu-sheet" id="ios-menu-sheet" role="dialog" aria-modal="true" aria-label="Meniu Navigare">
+      <div class="ios-sheet-grabber">
+        <span class="grabber-pill"></span>
+      </div>
+
+      <div class="ios-sheet-header">
+        <div class="ios-header-brand">
+          <img src="assets/logo.png" alt="Amanet No Limit" class="ios-header-logo">
+          <div>
+            <h3 class="ios-brand-title">Amanet No Limit</h3>
+            <span class="ios-brand-status"><span class="pulse-emerald-dot"></span> Deschis • 09:00 - 21:00</span>
+          </div>
+        </div>
+        <button class="ios-close-btn" id="ios-close-btn" aria-label="Închide meniul">✕</button>
+      </div>
+
+      <div class="ios-quick-ticker">
+        <div class="ios-ticker-left">
+          <span class="ticker-gold-coin">🪙</span>
+          <div>
+            <span class="ticker-sub">Cotație Spot SmartGold</span>
+            <strong class="ticker-val" id="ios-gold-ticker-val">Aur 24K: 647.67 Lei/g</strong>
+          </div>
+        </div>
+        <a href="index.html#cotatii-aur" class="ios-ticker-cta" onclick="closeIosMenu()">Vezi Tabel ›</a>
+      </div>
+
+      <div class="ios-sheet-content">
+        <div class="ios-group-title">TRANZACȚII &amp; COTAȚII</div>
+        <div class="ios-group-card">
+          <a href="calculator.html" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-gold">🧮</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Calculator Aur &amp; Împrumut</span>
+              <span class="ios-item-desc">Află instant suma și comisionul</span>
+            </div>
+            <span class="ios-item-badge">0.1%/zi</span>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="index.html#cotatii-aur" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-amber">🪙</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Cotații Burșiere Aur (8K - 24K)</span>
+              <span class="ios-item-desc">Sursă Spot + Marjă fixă -10%</span>
+            </div>
+            <span class="ios-item-badge green">Live</span>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="index.html#evaluare" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-emerald">📸</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Evaluare Gratuită Online</span>
+              <span class="ios-item-desc">Trimite poze și primești ofertă</span>
+            </div>
+            <span class="ios-item-badge">10 Min</span>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="produse.html" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-purple">🛍️</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Magazin Produse Verificate</span>
+              <span class="ios-item-desc">iPhone, bijuterii aur, ceasuri lux</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+        </div>
+
+        <div class="ios-group-title">SERVICII PRINCIPALE</div>
+        <div class="ios-group-card">
+          <a href="index.html#evaluare" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-cyan">📱</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Amanet &amp; Vânzare Electronice</span>
+              <span class="ios-item-desc">Telefoane, laptopuri, tablete, console</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="index.html#evaluare" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-red">🚗</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Amanet &amp; Vânzare Autoturisme</span>
+              <span class="ios-item-desc">Finanțare pe loc, parcare privată păzită</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="index.html#avantaje" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-yellow">⚖️</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Cum Funcționează (3 Pași)</span>
+              <span class="ios-item-desc">Contract legal, fără clauze ascunse</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+        </div>
+
+        <div class="ios-group-title">CONTACT &amp; LOCAȚIE</div>
+        <div class="ios-group-card">
+          <a href="contact.html" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-blue">📍</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Locație Agenție Sector 6</span>
+              <span class="ios-item-desc">Bdul Iuliu Maniu / Lujerului</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="contact.html" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-pink">🕒</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Program &amp; Date de Contact</span>
+              <span class="ios-item-desc">Luni - Duminică: 09:00 - 21:00</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="ios-sheet-footer">
+        <a href="https://wa.me/40761229922?text=Salut!%20Doresc%20o%20evaluare%20rapida." target="_blank" class="ios-btn-whatsapp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.46 3.53 1.34 5.06L2 22l5.17-1.36c1.47.8 3.14 1.27 4.87 1.27 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+          <span>WhatsApp Rapid</span>
+        </a>
+        <a href="tel:+40761229922" class="ios-btn-call">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>Apelează</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <script src="js/catalog-data.js"></script>
   <script src="js/metals-bursa.js"></script>

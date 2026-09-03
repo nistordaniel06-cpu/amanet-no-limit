@@ -397,23 +397,121 @@ function initFaqAccordion() {
 }
 
 /* ==========================================================================
-   7. MOBILE NAVIGATION & TABS
+   7. MOBILE NAVIGATION, TABS & INTERACTIVE IOS MENU SHEET
    ========================================================================== */
+function openIosMenu() {
+  const overlay = document.getElementById('ios-menu-overlay');
+  if (!overlay) return;
+  triggerHaptic(14);
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeIosMenu() {
+  const overlay = document.getElementById('ios-menu-overlay');
+  if (!overlay) return;
+  triggerHaptic(8);
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+window.openIosMenu = openIosMenu;
+window.closeIosMenu = closeIosMenu;
+
 function initMobileNav() {
   const hamburger = document.getElementById('hamburger-btn');
-  const navMenu = document.getElementById('nav-menu');
+  const openMenuBtn = document.getElementById('open-ios-menu-btn');
+  const closeBtn = document.getElementById('ios-close-btn');
+  const overlay = document.getElementById('ios-menu-overlay');
+  const sheet = document.getElementById('ios-menu-sheet');
+  const grabber = document.querySelector('.ios-sheet-grabber');
 
-  if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-    });
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-      });
+  // Trigger from Hamburger
+  if (hamburger) {
+    hamburger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openIosMenu();
     });
   }
+
+  // Trigger from Bottom Tab Bar Menu Button
+  if (openMenuBtn) {
+    openMenuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openIosMenu();
+    });
+  }
+
+  // Close Button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeIosMenu();
+    });
+  }
+
+  // Click outside to close
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeIosMenu();
+      }
+    });
+  }
+
+  // Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeIosMenu();
+    }
+  });
+
+  // Touch Swipe Down to Dismiss (Native iOS gesture)
+  if (sheet && grabber) {
+    let startY = 0;
+    let isDragging = false;
+
+    grabber.addEventListener('touchstart', (e) => {
+      startY = e.touches[0].clientY;
+      isDragging = true;
+    }, { passive: true });
+
+    grabber.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const deltaY = e.touches[0].clientY - startY;
+      if (deltaY > 0) {
+        sheet.style.transform = `translate(-50%, ${deltaY}px)`;
+        sheet.style.transition = 'none';
+      }
+    }, { passive: true });
+
+    grabber.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const deltaY = e.changedTouches[0].clientY - startY;
+      sheet.style.transition = '';
+      if (deltaY > 80) {
+        sheet.style.transform = '';
+        closeIosMenu();
+      } else {
+        sheet.style.transform = '';
+      }
+    }, { passive: true });
+  }
+
+  // Active state highlighting on bottom bar
+  const bottomBtns = document.querySelectorAll('.mobile-bar-btn');
+  bottomBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      triggerHaptic(6);
+      if (!btn.id.includes('open-ios-menu')) {
+        bottomBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    });
+  });
 
   // Tab switcher pentru calculatoare pe hero (Aur vs Imprumut)
   const calcTabs = document.querySelectorAll('.calc-tab-btn');
