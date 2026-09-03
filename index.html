@@ -9,7 +9,7 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#07090e">
   <title>Amanet No Limit | Aur, Telefoane, Ceasuri & Auto | Bani Pe Loc București</title>
-  <meta name="description" content="Casa de Amanet No Limit București Sector 6. Cele mai mari cotații la aur, electronice, ceasuri de lux și auto. Evaluare gratuită în 10 minute, comision minim de la 0.1%/zi.">
+  <meta name="description" content="Casa de Amanet No Limit București Sector 6. Cele mai mari cotații la aur, electronice, ceasuri de lux și auto. Evaluare gratuită în 10 minute, comision flexibil 0.5% - 0.8%/zi (0.5% aur, 0.8% obiecte).">
   <meta name="keywords" content="amanet bucuresti, amanet aur, amanet telefoane, amanet ceasuri lux, amanet auto, pret aur gram, amanet sector 6, iuliu maniu">
   
   <!-- Open Graph -->
@@ -105,12 +105,12 @@
           Bani Lichizi Pe Loc la <span class="text-gold">Cele Mai Mari Cotații</span> din București.
         </h1>
         <p class="hero-desc">
-          Amanetează sau vinde aur, telefoane de ultimă generație, laptopuri, ceasuri elvețiene sau autoturisme. Comision minim flexibil începând de la 0.1%/zi, confidențialitate garantată și contract legal semnat pe loc.
+          Amanetează sau vinde aur, telefoane de ultimă generație, laptopuri, ceasuri elvețiene sau autoturisme. Comision flexibil de la <strong>0.5%/zi pentru aur</strong> și <strong>0.8%/zi pentru obiecte</strong>, confidențialitate garantată și contract legal semnat pe loc.
         </p>
         
         <div class="hero-cta-group">
           <a href="#calculator" class="btn-cta-gold" style="padding: 14px 28px; font-size: 15px;">
-            🧮 Calculează Suma & Comisionul
+            🧮 Calculează Suma &amp; Comisionul
           </a>
           <a href="https://wa.me/40761229922?text=Salut!%20Vreau%20o%20evaluare%20rapida%20pentru%20un%20bun." target="_blank" class="btn-cta-emerald" style="padding: 14px 24px; font-size: 15px;">
             📲 Scrie pe WhatsApp
@@ -123,8 +123,8 @@
             <p>Timp mediu de plată</p>
           </div>
           <div class="hero-stat-item">
-            <h4>0.10%</h4>
-            <p>Comision minim pe zi</p>
+            <h4>0.5% - 0.8%</h4>
+            <p>Comision pe zi (Aur / Obiecte)</p>
           </div>
           <div class="hero-stat-item">
             <h4>10.000+</h4>
@@ -233,11 +233,11 @@
             <div class="calc-result-box">
               <div class="result-row">
                 <span>Comision pe zi:</span>
-                <span id="loan-daily-commission" style="color: #fff;">0.20% (4.00 RON/zi)</span>
+                <span id="loan-daily-commission" style="color: #fff;">0.50% (10.00 RON/zi)</span>
               </div>
               <div class="result-row">
                 <span>Comision total perioadă:</span>
-                <strong id="loan-total-commission" style="color: var(--gold-primary);">120 RON</strong>
+                <strong id="loan-total-commission" style="color: var(--gold-primary);">300 RON</strong>
               </div>
               <div class="result-row">
                 <span>Data scadenței:</span>
@@ -245,7 +245,7 @@
               </div>
               <div class="result-row main">
                 <span>Total de returnat la scadență:</span>
-                <span class="result-amount" id="loan-total-repay">2.120 RON</span>
+                <span class="result-amount" id="loan-total-repay">2.300 RON</span>
               </div>
             </div>
 
@@ -264,11 +264,34 @@
     <div class="container">
       <div class="showcase-banner-card">
         <div class="showcase-media">
-          <div class="showcase-img-frame">
-            <img src="assets/herophone1.png" alt="Amanet No Limit - Amanet și vânzare Electronice, Auto, Aur" class="showcase-img" loading="eager">
+          <div class="showcase-slider-wrap" id="showcase-slider">
+            <div class="showcase-slides-track">
+              <div class="showcase-slide active">
+                <img src="assets/herophone1.png" alt="Amanet No Limit - Electronice, Auto, Aur" class="showcase-img" loading="eager">
+              </div>
+              <div class="showcase-slide">
+                <img src="assets/slider2.png" alt="Ai nevoie de bani? Amanetează!" class="showcase-img" loading="lazy">
+              </div>
+              <div class="showcase-slide">
+                <img src="assets/slider3.png" alt="Obține bani din aur și electronice" class="showcase-img" loading="lazy">
+              </div>
+            </div>
+
+            <!-- Floating Badge Overlay -->
             <div class="showcase-badge-overlay">
               <span class="pulse-emerald-dot"></span>
               <span>Online &amp; În Agenție</span>
+            </div>
+
+            <!-- Slider Navigation Arrows -->
+            <button type="button" class="slider-arrow prev" id="slider-prev" aria-label="Slide anterior">‹</button>
+            <button type="button" class="slider-arrow next" id="slider-next" aria-label="Slide următor">›</button>
+
+            <!-- Slider Dots -->
+            <div class="slider-dots" id="slider-dots">
+              <button type="button" class="slider-dot active" data-slide="0" aria-label="Slide 1"></button>
+              <button type="button" class="slider-dot" data-slide="1" aria-label="Slide 2"></button>
+              <button type="button" class="slider-dot" data-slide="2" aria-label="Slide 3"></button>
             </div>
           </div>
         </div>
@@ -853,7 +876,7 @@
               <span class="ios-item-title">Calculator Aur &amp; Împrumut</span>
               <span class="ios-item-desc">Află instant suma și comisionul</span>
             </div>
-            <span class="ios-item-badge">0.1%/zi</span>
+            <span class="ios-item-badge">0.5% - 0.8%/zi</span>
             <span class="ios-chevron">›</span>
           </a>
 

@@ -2157,29 +2157,127 @@ dialog.custom-modal::backdrop {
   align-items: center;
 }
 
-.showcase-img-frame {
+.showcase-slider-wrap {
   position: relative;
   width: 100%;
   max-width: 580px;
+  height: 310px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1.5px solid rgba(245, 197, 24, 0.35);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.55), 0 0 25px rgba(245, 197, 24, 0.15);
   background: #ffffff;
-  transition: transform var(--spring-smooth), box-shadow var(--spring-smooth);
+  animation: floatMotion 5s ease-in-out infinite alternate;
 }
 
-.showcase-img-frame:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(245, 197, 24, 0.25);
+@keyframes floatMotion {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+  100% { transform: translateY(0px); }
+}
+
+.showcase-slider-wrap:hover {
+  animation-play-state: paused;
   border-color: var(--gold-primary);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.7), 0 0 35px rgba(245, 197, 24, 0.25);
 }
 
-.showcase-img {
+.showcase-slides-track {
+  position: relative;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+}
+
+.showcase-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.showcase-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.showcase-slide img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Slider Controls */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(14, 18, 27, 0.85);
+  border: 1px solid var(--border-gold);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all var(--spring-fast);
+  opacity: 0.8;
+}
+
+.slider-arrow:hover {
+  background: var(--gold-primary);
+  color: #000;
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-arrow.prev { left: 10px; }
+.slider-arrow.next { right: 10px; }
+
+.slider-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.slider-dot.active {
+  width: 22px;
+  border-radius: 10px;
+  background: var(--gold-primary);
 }
 
 .showcase-badge-overlay {
@@ -2199,6 +2297,7 @@ dialog.custom-modal::backdrop {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 10;
 }
 
 .showcase-info {

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGoldCalculator();
   initBursaSection();
   initLoanCalculator();
+  initShowcaseSlider();
   initEvaluationWizard();
   initCatalog();
   initFaqAccordion();
@@ -137,11 +138,14 @@ function initLoanCalculator() {
 
   if (!loanAmountRange || !loanDaysRange) return;
 
-  function calculateDailyRate(amount) {
-    if (amount <= 1000) return 0.25; // 0.25% / zi
-    if (amount <= 5000) return 0.20; // 0.20% / zi
-    if (amount <= 20000) return 0.15; // 0.15% / zi
-    return 0.10; // 0.10% / zi pentru sume mari
+  function calculateDailyRate(category = '') {
+    const cat = (category || '').toLowerCase();
+    // Aur & Bijuterii: comision fix de 0.5% pe zi
+    if (cat.includes('aur')) {
+      return 0.50;
+    }
+    // Obiecte (electronice, telefoane, laptopuri, ceasuri, auto etc.): comision fix de 0.8% pe zi
+    return 0.80;
   }
 
   function updateLoanCalc() {
@@ -149,7 +153,7 @@ function initLoanCalculator() {
     const days = parseInt(loanDaysRange.value, 10) || 30;
     const category = loanCategory ? loanCategory.value : 'Aur';
 
-    const dailyPercent = calculateDailyRate(amount);
+    const dailyPercent = calculateDailyRate(category);
     const dailyCost = (amount * dailyPercent) / 100;
     const totalCommission = Math.round(dailyCost * days);
     const totalRepay = amount + totalCommission;
@@ -394,6 +398,96 @@ function initFaqAccordion() {
       }
     });
   });
+}
+
+/* ==========================================================================
+   6B. DYNAMIC MOVING SHOWCASE SLIDER (3.2S ROTATION, TOUCH SWIPE & TILT)
+   ========================================================================== */
+function initShowcaseSlider() {
+  const slider = document.getElementById('showcase-slider');
+  if (!slider) return;
+
+  const slides = slider.querySelectorAll('.showcase-slide');
+  const dots = slider.querySelectorAll('.slider-dot');
+  const prevBtn = document.getElementById('slider-prev');
+  const nextBtn = document.getElementById('slider-next');
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+  let timer = null;
+
+  function showSlide(index) {
+    currentIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    timer = setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 3200); // 3.2 secunde ca pe No Limit original
+  }
+
+  function stopAutoPlay() {
+    if (timer) clearInterval(timer);
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      triggerHaptic(6);
+      showSlide(currentIndex + 1);
+      startAutoPlay();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      triggerHaptic(6);
+      showSlide(currentIndex - 1);
+      startAutoPlay();
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      triggerHaptic(6);
+      const idx = parseInt(dot.dataset.slide, 10);
+      showSlide(idx);
+      startAutoPlay();
+    });
+  });
+
+  // Pause on hover
+  slider.addEventListener('mouseenter', stopAutoPlay);
+  slider.addEventListener('mouseleave', startAutoPlay);
+
+  // Mobile Touch Swipe support
+  let touchStartX = 0;
+  slider.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    stopAutoPlay();
+  }, { passive: true });
+
+  slider.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaX = touchEndX - touchStartX;
+    if (deltaX > 40) {
+      triggerHaptic(6);
+      showSlide(currentIndex - 1); // swipe right -> previous
+    } else if (deltaX < -40) {
+      triggerHaptic(6);
+      showSlide(currentIndex + 1); // swipe left -> next
+    }
+    startAutoPlay();
+  }, { passive: true });
+
+  // Start auto-slide rotation
+  startAutoPlay();
 }
 
 /* ==========================================================================
