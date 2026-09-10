@@ -11,6 +11,7 @@ function triggerHaptic(duration = 10) {
 
 document.addEventListener('DOMContentLoaded', () => {
   initScheduleStatus();
+  setInterval(initScheduleStatus, 60000);
   initGoldCalculator();
   initBursaSection();
   initLoanCalculator();
@@ -24,46 +25,35 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ==========================================================================
    1. LIVE SCHEDULE & BUSINESS HOURS CHECK
    ========================================================================== */
+function getBusinessStatus(now = new Date()) {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Bucharest', weekday: 'short', hour: '2-digit',
+    minute: '2-digit', hourCycle: 'h23'
+  }).formatToParts(now).map(part => [part.type, part.value]));
+  const weekend = parts.weekday === 'Sat' || parts.weekday === 'Sun';
+  const closingHour = weekend ? 18 : 20;
+  const minutes = Number(parts.hour) * 60 + Number(parts.minute);
+  return { isOpen: minutes >= 600 && minutes < closingHour * 60, closingAt: closingHour + ':00' };
+}
+
 function initScheduleStatus() {
-  const statusEl = document.getElementById('business-status');
-  if (!statusEl) return;
-
-  const now = new Date();
-  // Folosim ora locală a României
-  const options = { timeZone: 'Europe/Bucharest', hour12: false };
-  const roTimeStr = now.toLocaleTimeString('en-US', { ...options, hour: '2-digit', minute: '2-digit' });
-  const [hours, minutes] = roTimeStr.split(':').map(Number);
-  const roDay = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Bucharest' })).getDay(); // 0 = Sunday
-
-  const currentMinutes = hours * 60 + minutes;
-  const openTime = 10 * 60; // 10:00
-  const closeTimeWeek = 20 * 60; // 20:00
-  const closeTimeSunday = 18 * 60; // 18:00
-
-  let isOpen = false;
-  let closingAt = "20:00";
-
-  if (roDay === 0) { // Duminică
-    isOpen = currentMinutes >= openTime && currentMinutes < closeTimeSunday;
-    closingAt = "18:00";
-  } else { // Luni - Sâmbătă
-    isOpen = currentMinutes >= openTime && currentMinutes < closeTimeWeek;
-    closingAt = "20:00";
+  const status = getBusinessStatus();
+  const text = status.isOpen ? `Deschis până la ${status.closingAt}` : 'Închis · Deschidem la 10:00';
+  const color = status.isOpen ? 'var(--emerald)' : 'var(--text-muted)';
+  const top = document.getElementById('business-status');
+  if (top) {
+    const dot = document.createElement('span');
+    dot.className = 'status-indicator';
+    dot.style.background = status.isOpen ? 'var(--emerald)' : 'var(--text-muted)';
+    const label = document.createElement('span');
+    label.textContent = text;
+    top.replaceChildren(dot, label);
+    top.style.color = color;
   }
-
-  if (isOpen) {
-    statusEl.innerHTML = `
-      <span class="status-indicator"></span>
-      <span>Deschis Acum (până la ${closingAt})</span>
-    `;
-    statusEl.style.color = 'var(--emerald)';
-  } else {
-    statusEl.innerHTML = `
-      <span class="status-indicator" style="background: var(--red-accent); box-shadow: 0 0 10px var(--red-accent);"></span>
-      <span>Închis momentan (Deschidem la 10:00)</span>
-    `;
-    statusEl.style.color = '#ef4444';
-  }
+  document.querySelectorAll('.ios-brand-status').forEach(el => {
+    el.textContent = text;
+    el.style.color = color;
+  });
 }
 
 /* ==========================================================================
