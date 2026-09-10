@@ -72,7 +72,12 @@ if($('products-grid')){
    const title=document.createElement('h2');title.textContent=p.title;
    const status=document.createElement('p');status.textContent='Preț și stoc la cerere';
    const link=document.createElement('a');link.className='button secondary';link.textContent='Cere detalii ↗';link.href=wa('Bună ziua! Mă interesează '+p.title+' (referință '+p.id+'). Este disponibil? Vă rog să îmi trimiteți prețul actual, fotografii reale și detalii despre stare și garanție.');
-   card.append(label,title,status,link);$('products-grid').append(card);
+   const media=document.createElement('div');media.className='product-photo';
+   const photo=document.createElement('img');photo.src=p.image;photo.alt='Imagine ilustrativă: '+p.categoryName;photo.loading='lazy';photo.decoding='async';photo.width=600;photo.height=450;
+   const caption=document.createElement('span');caption.className='product-photo-caption';caption.textContent='Imagine ilustrativă';
+   photo.addEventListener('error',()=>{photo.hidden=true;caption.textContent='Solicită fotografii pe WhatsApp';});
+   media.append(photo,caption);
+   card.append(media,label,title,status,link);$('products-grid').append(card);
   });
   $('catalog-count').textContent=items.length+' '+(items.length===1?'model':'modele')+' · '+names[category];$('catalog-empty').hidden=items.length>0;
   document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category===category)));
