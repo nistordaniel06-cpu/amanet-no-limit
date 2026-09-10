@@ -133,3 +133,32 @@ if(/(?:^|\/)index\.html$/.test(location.pathname)||location.pathname.endsWith('/
  const legacy={evaluare:'evaluare.html',magazin:'produse.html',contact:'contact.html',calculator:'calculator.html', 'cotatii-aur':'calculator.html#gold-rates'};
  if(Object.hasOwn(legacy,location.hash.slice(1)))location.replace(legacy[location.hash.slice(1)]);
 }
+
+// Banner rotation pauses on hover, keyboard focus, hidden tabs and reduced motion.
+const carousel=document.querySelector('.banner-carousel');
+if(carousel){
+ const slides=[...carousel.querySelectorAll('.banner-slide')];
+ const dots=[...carousel.querySelectorAll('[data-carousel-slide]')];
+ const motion=matchMedia('(prefers-reduced-motion: reduce)');
+ const pause=carousel.querySelector('[data-carousel-pause]');
+ let current=0,timer=null,paused=motion.matches,hovered=false,focused=false,start=null;
+ function schedule(){clearInterval(timer);timer=null;if(!paused&&!hovered&&!focused&&!document.hidden)timer=setInterval(()=>show(current+1),3200);}
+ function show(index){current=(index+slides.length)%slides.length;slides.forEach((slide,i)=>slide.hidden=i!==current);dots.forEach((dot,i)=>dot.setAttribute('aria-pressed',String(i===current)));}
+ function label(){pause.textContent=paused?'Redă':'Pauză';pause.setAttribute('aria-label',paused?'Pornește schimbarea automată':'Oprește schimbarea automată');}
+ carousel.querySelector('.banner-controls').hidden=false;
+ carousel.querySelector('[data-carousel-prev]').addEventListener('click',()=>{show(current-1);schedule();});
+ carousel.querySelector('[data-carousel-next]').addEventListener('click',()=>{show(current+1);schedule();});
+ dots.forEach(dot=>dot.addEventListener('click',()=>{show(Number(dot.dataset.carouselSlide));schedule();}));
+ pause.addEventListener('click',()=>{paused=!paused;label();schedule();});
+ carousel.addEventListener('mouseenter',()=>{hovered=true;schedule();});
+ carousel.addEventListener('mouseleave',()=>{hovered=false;schedule();});
+ carousel.addEventListener('focusin',()=>{focused=true;schedule();});
+ carousel.addEventListener('focusout',()=>{setTimeout(()=>{focused=carousel.contains(document.activeElement);schedule();},0);});
+ const surface=carousel.querySelector('.banner-slides');
+ surface.addEventListener('touchstart',e=>{start={x:e.touches[0].clientX,y:e.touches[0].clientY};clearInterval(timer);},{passive:true});
+ surface.addEventListener('touchend',e=>{if(start){const dx=e.changedTouches[0].clientX-start.x,dy=e.changedTouches[0].clientY-start.y;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))show(current+(dx<0?1:-1));}start=null;schedule();},{passive:true});
+ surface.addEventListener('touchcancel',()=>{start=null;schedule();},{passive:true});
+ document.addEventListener('visibilitychange',schedule);
+ motion.addEventListener('change',()=>{paused=motion.matches;label();schedule();});
+ label();schedule();
+}
