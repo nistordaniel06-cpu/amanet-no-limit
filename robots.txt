@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /docs/
-Disallow: /tests/
-Disallow: /scripts/
-Sitemap: https://amanetnolimit.com/sitemap.xml

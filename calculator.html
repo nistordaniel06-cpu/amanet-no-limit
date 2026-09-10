@@ -1,8 +1,380 @@
-<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=980, viewport-fit=cover"><meta name="theme-color" content="#101112"><title>Calculator aur și cost amanet | Amanet No Limit</title><meta name="description" content="Calculează orientativ valoarea aurului și costul unui împrumut. Suma, comisionul și totalul sunt afișate separat."><link rel="canonical" href="https://amanetnolimit.com/calculator.html"><meta property="og:title" content="Calculator aur și cost amanet | Amanet No Limit"><meta property="og:description" content="Calculează orientativ valoarea aurului și costul unui împrumut. Suma, comisionul și totalul sunt afișate separat."><meta property="og:type" content="website"><meta property="og:url" content="https://amanetnolimit.com/calculator.html"><link rel="icon" href="assets/logo.png"><link rel="stylesheet" href="css/style.css?v=20260910-5"><script src="js/site-config.js?v=20260910-5" defer></script><script src="js/catalog-data.js?v=20260910-5" defer></script><script src="js/calculators.js?v=20260910-5" defer></script><script src="js/main.js?v=20260910-5" defer></script></head><body>
-<a class="skip" href="#main">Sari la conținut</a><div class="topline"><div class="wrap"><span>București · Sector 6</span><span data-hours>Program în pagina Contact</span><a href="tel:+40761229922">0761 229 922</a></div></div>
-<header><div class="wrap nav"><a class="brand" href="index.html" aria-label="Amanet No Limit — Acasă"><img src="assets/logo.png" width="46" height="46" alt=""><span>AMANET<strong>NO LIMIT<span class="gold">.</span></strong></span></a><nav class="desktop" aria-label="Navigare principală"><a href="index.html" >Acasă</a><a href="calculator.html" aria-current="page">Calculator</a><a href="produse.html" >Magazin</a><a href="contact.html" >Contact</a></nav><a class="button primary header-cta" href="evaluare.html">Evaluează un bun ↗</a><button id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">Meniu ☰</button></div><nav id="mobile-menu" aria-label="Meniu mobil" hidden><a href="index.html">Acasă</a><a href="calculator.html">Calculator</a><a href="produse.html">Magazin</a><a href="contact.html">Contact</a><a href="evaluare.html">Evaluează un bun</a></nav></header>
-<main id="main"><section class="wrap section"><div class="intro"><p class="eyebrow">ESTIMĂRI TRANSPARENTE</p><h1>Cifre clare.<br><em>Decizii mai simple.</em></h1><p class="lead">Alege calculatorul potrivit. Sumele sunt orientative și se confirmă în agenție.</p></div><div class="tabs" role="tablist" aria-label="Tip calculator"><button id="tab-aur" role="tab" aria-controls="aur" aria-selected="true" data-tab="aur">Valoare aur</button><button id="tab-imprumut" role="tab" aria-controls="imprumut" aria-selected="false" tabindex="-1" data-tab="imprumut">Cost împrumut</button></div>
-<section id="aur" role="tabpanel" aria-labelledby="tab-aur"><div class="calculator-layout"><form id="gold-form" class="panel"><h2>Detaliile aurului</h2><label>Carataj<select name="karat"><option value="8k">8K · 333‰</option><option value="9k">9K · 375‰</option><option value="12k">12K · 500‰</option><option value="14k">14K · 585‰</option><option value="18k">18K · 750‰</option><option value="21k">21K · 875‰</option><option value="22k">22K · 916‰</option><option value="24k">24K · 999‰</option></select></label><label>Greutate netă (grame)<input name="grams" type="number" min="0.1" max="10000" step="0.1" value="10" inputmode="decimal" required></label><label>Operațiune<select name="mode"><option value="pawn">Amanet</option><option value="buy">Vânzare definitivă</option></select></label><p class="fineprint">Greutatea pietrelor și a componentelor care nu sunt din aur se exclude din evaluare.</p></form><aside class="result-panel"><p class="eyebrow">ESTIMAREA TA</p><output id="gold-total" class="big-total" aria-live="polite">—</output><p id="gold-breakdown"></p><p class="notice">Tarife de referință din catalogul existent, fără actualizare bursieră live. Confirmă prețul zilei în agenție.</p><a class="button primary full" id="gold-whatsapp" href="https://wa.me/40761229922">Cere confirmarea pe WhatsApp ↗</a><a class="text-link" href="evaluare.html?categorie=bijuterii">Adaugă detalii despre bijuterie ↗</a></aside></div></section>
-<section id="imprumut" role="tabpanel" aria-labelledby="tab-imprumut" hidden><div class="calculator-layout"><form id="loan-form" class="panel"><h2>Detaliile împrumutului</h2><label>Garanție<select name="category"><option value="gold">Aur și bijuterii</option><option value="goods">Electronice, ceasuri și alte bunuri</option></select></label><label>Sumă (lei)<input name="amount" type="number" min="100" max="1000000" step="0.01" value="1000" inputmode="decimal" required></label><label>Perioadă (zile)<input name="days" type="number" min="1" max="365" step="1" value="30" inputmode="numeric" required></label><p class="fineprint">Nu verifică un contract existent și nu include prelungiri, penalități sau alte taxe contractuale.</p></form><aside class="result-panel"><p class="eyebrow">TOTAL ESTIMAT DE RAMBURSAT</p><output id="loan-total" class="big-total" aria-live="polite">—</output><dl id="loan-breakdown"></dl><p class="notice">Comision simplu: sumă × procent zilnic × număr de zile. Confirmă toate costurile înainte de semnare.</p><a class="button primary full" id="loan-whatsapp" href="https://wa.me/40761229922">Discută simularea ↗</a></aside></div></section>
-<div class="section-heading rates-heading"><div><p class="eyebrow">TARIFE DE REFERINȚĂ</p><h2>Aur, pe fiecare carataj.</h2></div><span class="pill">Actualizare manuală</span></div><div class="table-scroll"><table><caption>Lei pe gram · valorile se confirmă în agenție</caption><thead><tr><th scope="col">Carataj</th><th scope="col">Puritate</th><th scope="col">Amanet / g</th><th scope="col">Vânzare / g</th></tr></thead><tbody id="gold-rates"></tbody></table></div></section></main><footer><div class="wrap footer-grid"><div><a class="footer-brand" href="index.html">NO LIMIT.</a><p>Amanet, aur și tehnologie.<br>Bulevardul Iuliu Maniu 57, București.</p></div><div><h2>Explorează</h2><a href="evaluare.html">Evaluare online</a><a href="calculator.html">Calculatoare</a><a href="produse.html">Magazin</a></div><div><h2>Vorbește cu noi</h2><a href="tel:+40761229922">0761 229 922</a><a href="https://wa.me/40761229922">WhatsApp</a><a href="contact.html">Program și indicații</a></div><div><h2>Informații</h2><a href="termeni.html">Condiții de utilizare</a><a href="gdpr.html">Confidențialitate</a><a href="cookies.html">Cookies</a><a href="https://anpc.ro">ANPC</a></div></div><div class="wrap footer-bottom"><span>© 2026 Amanet No Limit</span><span>Evaluarea finală se face în agenție.</span></div></footer>
-<nav class="mobile-actions" aria-label="Acțiuni rapide"><a href="tel:+40761229922">Sună</a><a href="https://wa.me/40761229922">WhatsApp</a><a class="primary" href="evaluare.html">Evaluare ↗</a></nav><noscript><p class="wrap notice">Activează JavaScript pentru calculatoare, catalog și formular. Ne poți contacta direct la <a href="tel:+40761229922">0761 229 922</a>.</p></noscript></body></html>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Amanet No Limit">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#07090e">
+  <title>Calculator Amanet & Cotații Aur Live | Amanet No Limit</title>
+  <meta name="description" content="Simulează instant împrumutul de amanet și cotațiile pentru aur. Vezi comisionul zilnic, data scadenței și suma exactă pe care o primești cash pe loc.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260903-4">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <aside class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-status" id="business-status">
+        <span class="status-indicator"></span>
+        <span>Se verifică programul...</span>
+      </div>
+      <div class="top-bar-contact">
+        <a href="tel:+40761229922">📞 0761 229 922</a>
+        <a href="https://wa.me/40761229922" target="_blank" style="color: var(--emerald);">💬 WhatsApp</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Amanet No Limit" class="logo-img">
+        <div class="logo-info">
+          <div class="logo-name">AMANET <span>NO LIMIT</span></div>
+          <div class="logo-tag">Calculator & Simulare</div>
+        </div>
+      </a>
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Acasă</a></li>
+          <li><a href="calculator.html" class="nav-link active">Calculator</a></li>
+          <li><a href="produse.html" class="nav-link">Magazin Produse</a></li>
+          <li><a href="index.html#evaluare" class="nav-link">Evaluare Online</a></li>
+          <li><a href="contact.html" class="nav-link">Contact & Locație</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="https://wa.me/40761229922" target="_blank" class="btn-cta-emerald">📲 Întreabă pe WhatsApp</a>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Deschide Meniu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CALCULATOR DETAILED SECTION -->
+  <main style="padding: 60px 0;">
+    <div class="container" style="max-width: 900px;">
+      <div class="section-header">
+        <span class="section-tag">Simulator Financiar Transparent</span>
+        <h1 class="section-title">Calculator Amanet Aur & Bunuri</h1>
+        <p class="section-subtitle">
+          Fără cont, fără logare forțată. Află instant câți bani primești pe loc și care este comisionul exact până la scadență.
+        </p>
+      </div>
+
+      <div class="hero-card" style="margin-bottom: 40px;">
+        <div class="calc-tabs">
+          <button class="calc-tab-btn active" data-pane="pane-gold">💰 Calculator Cotații Aur</button>
+          <button class="calc-tab-btn" data-pane="pane-loan">📑 Simulare Împrumut & Comision</button>
+        </div>
+
+        <!-- PANE 1: AUR -->
+        <div class="calc-pane active" id="pane-gold">
+          <div class="input-group">
+            <label class="input-label" for="gold-type-mode">Tipul tranzacției:</label>
+            <select class="calc-select" id="gold-type-mode">
+              <option value="pawn">Împrumut Amanet (Garanție cu posibilitate de recuperare)</option>
+              <option value="buy">Vânzare Definitivă (Cumpărare Aur Cash)</option>
+            </select>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="input-group">
+              <label class="input-label" for="gold-karat">Carataj / Puritate:</label>
+              <select class="calc-select" id="gold-karat">
+                <option value="14k" selected>Aur 14K (585‰) — Standard România</option>
+                <option value="18k">Aur 18K (750‰) — Bijuterii lux / Italia</option>
+                <option value="21k">Aur 21K (875‰) — Bijuterii Orient</option>
+                <option value="22k">Aur 22K (916‰) — Ducați / Monede</option>
+                <option value="24k">Aur 24K (999‰) — Lingouri / Aur pur</option>
+                <option value="12k">Aur 12K (500‰) — Ceasuri / Obiecte</option>
+                <option value="9k">Aur 9K (375‰) — Bijuterii uzuale</option>
+                <option value="8k">Aur 8K (333‰) — Bijuterii vechi</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <div class="input-label">
+                <span>Gramaj estimat:</span>
+                <span class="input-val-highlight"><input type="number" id="gold-weight-number" inputmode="decimal" pattern="[0-9]*" value="15" min="1" max="500" style="width: 70px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> g</span>
+              </div>
+              <input type="range" class="calc-range" id="gold-weight-range" min="1" max="100" value="15" step="0.5" style="margin-top: 15px;">
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div class="result-row">
+              <span>Cotație oferită pe gram:</span>
+              <strong id="gold-rate-val" style="color: #fff;">250 RON / gram</strong>
+            </div>
+            <div class="result-row">
+              <span>Taxe ascunse sau comisioane de analiză:</span>
+              <span style="color: var(--emerald); font-weight: 700;">0 RON (Gratuit)</span>
+            </div>
+            <div class="result-row main">
+              <span>Bani Cash pe Loc:</span>
+              <span class="result-amount" id="gold-total-val">3.750 RON</span>
+            </div>
+          </div>
+
+          <a id="gold-whatsapp-btn" href="#" target="_blank" class="calc-action-btn">
+            <span>📲 Solicită Rezervarea Fondurilor pe WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- PANE 2: SIMULARE IMPRUMUT -->
+        <div class="calc-pane" id="pane-loan">
+          <div class="input-group">
+            <label class="input-label" for="loan-category">Tip garanție gajată:</label>
+            <select class="calc-select" id="loan-category">
+              <option>Aur & Bijuterii</option>
+              <option>Telefoane & Tablete</option>
+              <option>Ceasuri de Lux</option>
+              <option>Laptopuri & Console IT</option>
+              <option>Autoturisme</option>
+            </select>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="input-group">
+              <div class="input-label">
+                <span>Valoare împrumut (RON):</span>
+                <span class="input-val-highlight"><input type="number" id="loan-amount-number" inputmode="numeric" pattern="[0-9]*" value="3000" min="200" max="100000" step="100" style="width: 90px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> RON</span>
+              </div>
+              <input type="range" class="calc-range" id="loan-amount-range" min="300" max="30000" value="3000" step="100" style="margin-top: 15px;">
+            </div>
+
+            <div class="input-group">
+              <div class="input-label">
+                <span>Durată contract (Zile):</span>
+                <span class="input-val-highlight"><input type="number" id="loan-days-number" inputmode="numeric" pattern="[0-9]*" value="30" min="5" max="90" style="width: 60px; background: transparent; border: 1px solid var(--border-gold); color: #fff; text-align: center; border-radius: 6px; padding: 4px;"> zile</span>
+              </div>
+              <input type="range" class="calc-range" id="loan-days-range" min="5" max="90" value="30" step="1" style="margin-top: 15px;">
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div class="result-row">
+              <span>Comision zilnic aplicabil:</span>
+              <span id="loan-daily-commission" style="color: #fff;">0.50% (15.00 RON/zi)</span>
+            </div>
+            <div class="result-row">
+              <span>Comision total perioadă:</span>
+              <strong id="loan-total-commission" style="color: var(--gold-primary);">450 RON</strong>
+            </div>
+            <div class="result-row">
+              <span>Data scadenței contractului:</span>
+              <span id="loan-due-date" style="color: #fff;">-</span>
+            </div>
+            <div class="result-row">
+              <span>Cost prelungire la scadență:</span>
+              <span style="color: var(--text-muted);">Doar plata comisionului (450 RON)</span>
+            </div>
+            <div class="result-row main">
+              <span>Total de rambursat la scadență:</span>
+              <span class="result-amount" id="loan-total-repay">3.450 RON</span>
+            </div>
+          </div>
+
+          <a id="loan-whatsapp-btn" href="#" target="_blank" class="calc-action-btn">
+            <span>📲 Înregistrează Simularea pe WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- INFORMAȚII CONTRACTUALE TRANSPARENTE -->
+      <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+        <h3 style="color: var(--gold-primary); margin-bottom: 15px;">🛡️ Politica Noastră de Siguranță și Transparență</h3>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; color: var(--text-muted); font-size: 14px;">
+          <li>✔ <strong>Comisioane clare:</strong> Comision de <strong>0.5%/zi pentru Aur</strong> și <strong>0.8%/zi pentru Obiecte &amp; Electronice</strong>. Fără comisioane ascunse sau taxe de dosar.</li>
+          <li>✔ <strong>Prelungire nelimitată:</strong> Dacă la data scadenței nu dorești să rambursezi suma împrumutată, achiți doar comisionul și contractul se prelungește automat.</li>
+          <li>✔ <strong>Rambursare parțială:</strong> Poți achita oricând o parte din suma principală, iar comisionul va fi recalculat proporțional la suma rămasă.</li>
+          <li>✔ <strong>Perioadă de grație de 14 zile:</strong> Bunul tău este păstrat în siguranță chiar și după scadență, oferindu-ți timp suplimentar pentru achitare.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <p>&copy; 2026 Amanet No Limit. Toate drepturile rezervate.</p>
+      <a href="tel:+40761229922" style="color: var(--gold-primary);">📞 0761 229 922</a>
+    </div>
+  <!-- ================= STICKY MOBILE NAVIGATION BAR (IOS TABBAR) ================= -->
+  <div class="mobile-bottom-bar">
+    <div class="mobile-bottom-bar-grid">
+      <a href="index.html" class="mobile-bar-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>Acasă</span>
+      </a>
+      <a href="index.html#cotatii-aur" class="mobile-bar-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-2h2v2zm0-4h-2V7h2v5.5z"/></svg>
+        <span>Cotații</span>
+      </a>
+      <a href="calculator.html" class="mobile-bar-btn active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-6 14H7v-2h6v2zm4-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <span>Calculator</span>
+      </a>
+      <a href="index.html#evaluare" class="mobile-bar-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <span>Evaluare</span>
+      </a>
+      <button type="button" class="mobile-bar-btn" id="open-ios-menu-btn" aria-label="Deschide Meniu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+        <span>Meniu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= IOS INTERACTIVE ACTION SHEET MENU ================= -->
+  <div class="ios-menu-overlay" id="ios-menu-overlay" aria-hidden="true">
+    <div class="ios-menu-sheet" id="ios-menu-sheet" role="dialog" aria-modal="true" aria-label="Meniu Navigare">
+      <div class="ios-sheet-grabber">
+        <span class="grabber-pill"></span>
+      </div>
+
+      <div class="ios-sheet-header">
+        <div class="ios-header-brand">
+          <img src="assets/logo.png" alt="Amanet No Limit" class="ios-header-logo">
+          <div>
+            <h3 class="ios-brand-title">Amanet No Limit</h3>
+            <span class="ios-brand-status"><span class="pulse-emerald-dot"></span> Deschis • 09:00 - 21:00</span>
+          </div>
+        </div>
+        <button class="ios-close-btn" id="ios-close-btn" aria-label="Închide meniul">✕</button>
+      </div>
+
+      <div class="ios-quick-ticker">
+        <div class="ios-ticker-left">
+          <span class="ticker-gold-coin">🪙</span>
+          <div>
+            <span class="ticker-sub">Cotație Spot SmartGold</span>
+            <strong class="ticker-val" id="ios-gold-ticker-val">Aur 24K: 647.67 Lei/g</strong>
+          </div>
+        </div>
+        <a href="index.html#cotatii-aur" class="ios-ticker-cta" onclick="closeIosMenu()">Vezi Tabel ›</a>
+      </div>
+
+      <div class="ios-sheet-content">
+        <div class="ios-group-title">TRANZACȚII &amp; COTAȚII</div>
+        <div class="ios-group-card">
+          <a href="calculator.html" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-gold">🧮</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Calculator Aur &amp; Împrumut</span>
+              <span class="ios-item-desc">Află instant suma și comisionul</span>
+            </div>
+            <span class="ios-item-badge">0.5% - 0.8%/zi</span>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="index.html#cotatii-aur" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-amber">🪙</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Cotații Burșiere Aur (8K - 24K)</span>
+              <span class="ios-item-desc">Sursă Spot + Marjă fixă -10%</span>
+            </div>
+            <span class="ios-item-badge green">Live</span>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="index.html#evaluare" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-emerald">📸</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Evaluare Gratuită Online</span>
+              <span class="ios-item-desc">Trimite poze și primești ofertă</span>
+            </div>
+            <span class="ios-item-badge">10 Min</span>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="produse.html" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-purple">🛍️</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Magazin Produse Verificate</span>
+              <span class="ios-item-desc">iPhone, bijuterii aur, ceasuri lux</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+        </div>
+
+        <div class="ios-group-title">SERVICII PRINCIPALE</div>
+        <div class="ios-group-card">
+          <a href="index.html#evaluare" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-cyan">📱</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Amanet &amp; Vânzare Electronice</span>
+              <span class="ios-item-desc">Telefoane, laptopuri, tablete, console</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="index.html#evaluare" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-red">🚗</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Amanet &amp; Vânzare Autoturisme</span>
+              <span class="ios-item-desc">Finanțare pe loc, parcare privată păzită</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="index.html#avantaje" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-yellow">⚖️</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Cum Funcționează (3 Pași)</span>
+              <span class="ios-item-desc">Contract legal, fără clauze ascunse</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+        </div>
+
+        <div class="ios-group-title">CONTACT &amp; LOCAȚIE</div>
+        <div class="ios-group-card">
+          <a href="contact.html" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-blue">📍</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Locație Agenție Sector 6</span>
+              <span class="ios-item-desc">Bdul Iuliu Maniu / Lujerului</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+
+          <a href="contact.html" class="ios-menu-item" onclick="closeIosMenu()">
+            <div class="ios-item-icon bg-gradient-pink">🕒</div>
+            <div class="ios-item-body">
+              <span class="ios-item-title">Program &amp; Date de Contact</span>
+              <span class="ios-item-desc">Luni - Duminică: 09:00 - 21:00</span>
+            </div>
+            <span class="ios-chevron">›</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="ios-sheet-footer">
+        <a href="https://wa.me/40761229922?text=Salut!%20Doresc%20o%20evaluare%20rapida." target="_blank" class="ios-btn-whatsapp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.46 3.53 1.34 5.06L2 22l5.17-1.36c1.47.8 3.14 1.27 4.87 1.27 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+          <span>WhatsApp Rapid</span>
+        </a>
+        <a href="tel:+40761229922" class="ios-btn-call">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>Apelează</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/catalog-data.js?v=20260903-4"></script>
+  <script src="js/metals-bursa.js?v=20260903-4"></script>
+  <script src="js/main.js?v=20260903-4"></script>
+</body>
+</html>
