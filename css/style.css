@@ -2444,3 +2444,38 @@ dialog.custom-modal::backdrop {
   }
 }
 
+
+/* Keep menu groups at their natural height; scroll the content, never clip rows. */
+.ios-menu-sheet{height:min(88dvh,850px);max-height:calc(100dvh - max(8px,env(safe-area-inset-top,0px)))}
+.ios-sheet-grabber,.ios-sheet-header,.ios-quick-ticker,.ios-sheet-footer{flex-shrink:0}
+.ios-sheet-content{flex:1 1 auto;min-height:0;overscroll-behavior-y:contain;touch-action:pan-y;scroll-padding-block:16px}
+.ios-sheet-content>*,.ios-group-card,.ios-group-title{flex-shrink:0}
+.ios-header-brand{min-width:0}
+.ios-header-brand>div{min-width:0}
+.ios-brand-title{overflow-wrap:anywhere}
+.ios-close-btn{flex-shrink:0;min-width:44px;min-height:44px}
+.ios-menu-item:focus-visible,.ios-close-btn:focus-visible,.ios-sheet-footer a:focus-visible{outline:2px solid var(--gold-primary);outline-offset:-3px}
+@media(max-width:600px){
+ .ios-menu-sheet{width:100%;padding-bottom:max(10px,env(safe-area-inset-bottom,0px))}
+ .ios-sheet-header{padding:4px 16px 12px;gap:12px}
+ .ios-sheet-content{padding:12px 14px 20px;gap:16px}
+ .ios-group-title{font-size:12px;margin-left:8px}
+ .ios-menu-item{display:grid;grid-template-columns:34px minmax(0,1fr) 14px;gap:6px 10px;padding:14px 12px;min-height:70px}
+ .ios-item-icon{grid-column:1;grid-row:1 / span 2;align-self:center}
+ .ios-item-body{grid-column:2;grid-row:1;gap:4px}
+ .ios-item-title{font-size:15px;line-height:1.35;overflow-wrap:anywhere}
+ .ios-item-desc{font-size:14px;line-height:1.4;white-space:normal;overflow:visible;text-overflow:clip}
+ .ios-item-badge{grid-column:2;grid-row:2;justify-self:start;font-size:12px;max-width:100%;white-space:normal}
+ .ios-chevron{grid-column:3;grid-row:1 / span 2;align-self:center;margin:0}
+ .ios-quick-ticker{margin:12px 14px;flex-wrap:wrap;gap:10px}
+ .ios-ticker-left{min-width:0;flex:1 1 180px}
+ .ios-ticker-left>div{min-width:0}
+ .ticker-val,.ticker-sub{overflow-wrap:anywhere;white-space:normal}
+ .ios-ticker-cta{min-height:44px;display:flex;align-items:center}
+ .ios-sheet-footer{padding:10px 14px 0;gap:10px}
+ .ios-btn-whatsapp,.ios-btn-call{font-size:14px;min-height:48px;padding:10px 8px}
+}
+@media(max-height:520px){
+ .ios-menu-sheet{height:calc(100dvh - 8px);overflow-y:auto;overscroll-behavior-y:contain}
+ .ios-sheet-content{flex:none;overflow:visible}
+}
