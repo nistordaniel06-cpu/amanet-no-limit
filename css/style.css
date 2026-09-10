@@ -19,3 +19,6 @@ h1,h2,h3,.phone{overflow-wrap:anywhere}.intro .lead:empty{display:none}
 .banner-dots button::after{content:'';display:block;width:7px;height:7px;border-radius:50%;background:#929496;margin:auto}
 .banner-dots [aria-pressed=true]::after{background:#e9c76b;width:16px;border-radius:8px}
 .banner-controls [data-carousel-pause]{padding-inline:10px}
+
+/* Keep desktop proportions on phones without browser text inflation; pinch zoom remains enabled. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
