@@ -1,0 +1,12 @@
+# Example only: merge into existing Apache configuration AFTER reviewing hosting and routes.
+# Root-domain deployment only; do not copy unchanged into a staging subfolder.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^Pagini/telefoane\.html$ /produse.html?categorie=telefoane [R=301,L]
+RewriteRule ^Pagini/laptopuri\.html$ /produse.html?categorie=laptopuri [R=301,L]
+RewriteRule ^Pagini/bijuterii\.html$ /produse.html?categorie=bijuterii [R=301,L]
+RewriteRule ^Pagini/ceasuri\.html$ /produse.html?categorie=ceasuri [R=301,L]
+RewriteRule ^Pagini/auto\.html$ /produse.html?categorie=auto [R=301,L]
+RewriteRule ^Pagini/contact\.html$ /contact.html [R=301,L]
+RewriteRule ^Pagini/amaneteaza\.html$ /evaluare.html [R=301,L]
+</IfModule>
