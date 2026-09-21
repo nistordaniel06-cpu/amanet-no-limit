@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07090e">
+  <title>Admin | Amanet No Limit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <img src="../assets/logo.png" alt="Amanet No Limit">
+        <div><strong>AMANET <span>NO LIMIT</span></strong><small>Admin Panel</small></div>
+      </a>
+      <button id="logout-btn" class="ghost hidden" type="button">Ieșire</button>
+    </header>
+
+    <section id="auth-view" class="card auth-card">
+      <div class="eyebrow">ADMIN SECURIZAT</div>
+      <h1>Autentificare</h1>
+      <p>Intră în panoul de administrare pentru produse, prețuri, stoc și vizibilitate.</p>
+      <form id="auth-form" class="stack">
+        <label>Email<input id="email" type="email" autocomplete="email" required></label>
+        <label>Parolă<input id="password" type="password" autocomplete="current-password" minlength="8" required></label>
+        <div class="row">
+          <button class="primary" type="submit">Intră în cont</button>
+          <button id="signup-btn" class="secondary" type="button">Creează cont</button>
+        </div>
+      </form>
+      <p id="auth-message" class="message"></p>
+    </section>
+
+    <section id="claim-view" class="card hidden">
+      <div class="eyebrow">PRIMA ACTIVARE</div>
+      <h2>Activează contul de administrator</h2>
+      <p>Contul este autentificat, dar încă nu are drepturi de administrare. Introdu codul unic de activare.</p>
+      <form id="claim-form" class="stack">
+        <label>Cod activare admin<input id="claim-token" type="text" autocomplete="off" required></label>
+        <button class="primary" type="submit">Activează administrator</button>
+      </form>
+      <p id="claim-message" class="message"></p>
+    </section>
+
+    <section id="dashboard-view" class="hidden">
+      <div class="hero-row">
+        <div>
+          <div class="eyebrow">MAGAZIN LIVE</div>
+          <h1>Produse & stoc</h1>
+          <p>Editezi datele din backend fără să schimbi designul site-ului public.</p>
+        </div>
+        <button id="new-product-btn" class="primary" type="button">+ Produs nou</button>
+      </div>
+
+      <div class="stats">
+        <article class="stat"><span>Total produse</span><strong id="stat-total">0</strong></article>
+        <article class="stat"><span>Active</span><strong id="stat-active">0</strong></article>
+        <article class="stat"><span>Stoc total</span><strong id="stat-stock">0</strong></article>
+      </div>
+
+      <div class="toolbar card">
+        <input id="admin-search" type="search" placeholder="Caută produs...">
+        <select id="admin-filter">
+          <option value="all">Toate categoriile</option>
+          <option value="telefoane">Telefoane</option>
+          <option value="bijuterii">Aur & Bijuterii</option>
+          <option value="ceasuri">Ceasuri</option>
+          <option value="laptopuri">Laptopuri & IT</option>
+          <option value="auto">Auto</option>
+        </select>
+      </div>
+
+      <div id="products-list" class="product-list"></div>
+      <p id="dashboard-message" class="message"></p>
+    </section>
+  </main>
+
+  <dialog id="product-dialog" class="product-dialog">
+    <form id="product-form" method="dialog" class="stack">
+      <div class="dialog-head">
+        <div><div class="eyebrow">EDITARE PRODUS</div><h2 id="dialog-title">Produs</h2></div>
+        <button id="close-dialog-btn" class="icon-btn" type="button">✕</button>
+      </div>
+      <input id="product-id" type="hidden">
+      <div class="grid-2">
+        <label>Titlu<input id="product-title" required></label>
+        <label>Categorie<select id="product-category" required><option value="telefoane">Telefoane</option><option value="bijuterii">Aur & Bijuterii</option><option value="ceasuri">Ceasuri</option><option value="laptopuri">Laptopuri & IT</option><option value="auto">Auto</option></select></label>
+        <label>Denumire categorie<input id="product-category-name" required></label>
+        <label>Preț actual<input id="product-price" type="number" min="0" step="0.01" required></label>
+        <label>Preț vechi<input id="product-old-price" type="number" min="0" step="0.01"></label>
+        <label>Stoc<input id="product-stock" type="number" min="0" step="1" required></label>
+        <label>Stare<input id="product-condition"></label>
+        <label>Garanție<input id="product-warranty"></label>
+        <label>Badge<input id="product-badge"></label>
+        <label>Tip badge<input id="product-badge-type" placeholder="hot / sale / gold / luxury"></label>
+        <label class="span-2">URL imagine<input id="product-image" type="url"></label>
+        <label class="span-2">Specificații, una pe rând<textarea id="product-specs" rows="5"></textarea></label>
+        <label class="span-2">Descriere<textarea id="product-description" rows="5"></textarea></label>
+      </div>
+      <div class="checks">
+        <label><input id="product-featured" type="checkbox"> Recomandat</label>
+        <label><input id="product-active" type="checkbox" checked> Vizibil pe site</label>
+      </div>
+      <div class="row end">
+        <button id="delete-product-btn" class="danger hidden" type="button">Șterge</button>
+        <button class="primary" type="submit">Salvează</button>
+      </div>
+      <p id="product-message" class="message"></p>
+    </form>
+  </dialog>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
