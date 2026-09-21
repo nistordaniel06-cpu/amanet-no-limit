@@ -44,6 +44,7 @@ class ContinuousBursaEngine {
     this.subscribers = [];
     this.isSyncing = false;
     this.source = 'SmartGold';
+    this.syncWithGlobalRates();
     this.initHeartbeat();
   }
 
@@ -163,4 +164,5 @@ class ContinuousBursaEngine {
 window.MetalsEngine = new ContinuousBursaEngine();
 
 // Ajustările vizuale cerute pe mobil sunt separate de motorul de prețuri.
-import('./smartgold-ui.js').catch(() => {});
+const scriptBase = document.currentScript?.src || location.href;
+import(new URL('smartgold-ui.js', scriptBase).href).catch(() => {});
